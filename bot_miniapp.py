@@ -12,12 +12,15 @@ bot = telebot.TeleBot(BOT_TOKEN)
 def start(message):
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
     kb.add(KeyboardButton(
-        "📖 Открыть материалы",
+        "Начать подготовку",
         web_app=WebAppInfo(url=WEBAPP_URL)
     ))
     bot.send_message(
         message.chat.id,
-        "Привет! Здесь теория и тесты для подготовки к заданиям 10 и 11 ЕГЭ по русскому языку.",
+        "Привет! Ты здесь, значит, ЕГЭ по русскому уже маячит на горизонте 😅
+Не паникуй — я помогу разложить всё по полочкам.
+Каждый день немного практики — и к экзамену ты будешь во всеоружии 🎯
+Готов? Жми «Начать подготовку»!",
         reply_markup=kb
     )
 
