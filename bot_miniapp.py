@@ -1,34 +1,23 @@
+import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, ContextTypes
 import logging
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
-# ── Вставь сюда свой токен от @BotFather
-import os
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-# ── URL твоего задеплоенного мини-приложения (см. README)
-WEBAPP_URL = "https://ytoch324.github.io/TOT_SAMbIUEGEHELPER/"
+WEBAPP_URL = "https://ytoch324.github.io/TOT_SAMbIUEGEHELPER/"  # вставь свою ссылку
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     kb = InlineKeyboardMarkup([[
         InlineKeyboardButton(
-            "📚 Открыть шпаргалку ЕГЭ",
+            "📖 Открыть материалы",
             web_app=WebAppInfo(url=WEBAPP_URL)
         )
     ]])
     await update.message.reply_text(
-        "👋 Привет!\n\n"
-        "Это мини-приложение для подготовки к *заданиям 10 и 11* ЕГЭ по русскому языку.\n\n"
-        "Внутри:\n"
-        "📚 Теория по суффиксам (зад. 11)\n"
-        "🔤 Теория по приставкам (зад. 10)\n"
-        "✏️ Тест на 15 вопросов\n"
-        "📋 Шпаргалка одним экраном\n\n"
-        "Нажми кнопку ниже 👇",
-        parse_mode="Markdown",
+        "Привет! Здесь теория и тесты для подготовки к заданиям 10 и 11 ЕГЭ по русскому языку.",
         reply_markup=kb
     )
 
