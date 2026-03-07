@@ -614,7 +614,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
       <button class="back-btn hidden" id="backBtn" onclick="goBack()">←</button>
       <div class="header-title">
         <h1 id="headerTitle">ЕГЭ 2026 · Русский язык</h1>
-        <p id="headerSub">Задания 10 и 11</p>
+        <p id="headerSub">Задания 9, 10 и 11</p>
       </div>
       <div style="width:32px;flex-shrink:0"></div>
     </div>
@@ -627,33 +627,149 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
     <!-- ─── HOME ─── -->
     <div class="view active" id="view-home">
       <div class="home-hero">
-        <h1>Теория<br><span>ЕГЭ 2026</span></h1>
-        <p>Задания 10 и 11 по русскому языку.<br>Теория, примеры, тесты, шпаргалки.</p>
+        <h1>Русский<br><span>ЕГЭ 2026</span></h1>
+        <p>Задания 9, 10 и 11 · теория, шпаргалки, тесты</p>
       </div>
-      <div class="home-grid">
-        <button class="home-card t11" onclick="openView('view-11')">
-          <span class="hc-icon">📚</span>
-          <div class="hc-title">Суффиксы</div>
-          <div class="hc-desc">5 разделов теории</div>
-          <span class="hc-badge y">Задание 11</span>
+
+      <!-- 4 большие кнопки -->
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+
+        <button class="home-card" style="border-color:rgba(123,108,255,.3);text-align:left" onclick="openView('view-menu-tasks')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.6rem">📝</span>
+            <div>
+              <div class="hc-title" style="font-size:0.8rem">Тестовые задания</div>
+              <div class="hc-desc">Теория по заданиям 9, 10, 11</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted);font-size:1rem">›</span>
+          </div>
         </button>
-        <button class="home-card t10" onclick="openView('view-10')">
-          <span class="hc-icon">🔤</span>
-          <div class="hc-title">Приставки</div>
-          <div class="hc-desc">5 разделов теории</div>
-          <span class="hc-badge p">Задание 10</span>
+
+        <button class="home-card" style="border-color:rgba(255,159,90,.3);text-align:left;opacity:.7" onclick="">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.6rem">✍️</span>
+            <div>
+              <div class="hc-title" style="font-size:0.8rem">Сочинение</div>
+              <div class="hc-desc">Coming soon...</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted);font-size:1rem">›</span>
+          </div>
         </button>
-        <button class="home-card test" onclick="openView('view-test')">
-          <span class="hc-icon">✏️</span>
-          <div class="hc-title">Тест</div>
-          <div class="hc-desc">15 вопросов по обоим заданиям</div>
-          <span class="hc-badge r">15 вопросов</span>
+
+        <button class="home-card" style="border-color:rgba(95,255,176,.3);text-align:left" onclick="openView('view-menu-cheat')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.6rem">📋</span>
+            <div>
+              <div class="hc-title" style="font-size:0.8rem">Шпаргалки</div>
+              <div class="hc-desc">Кратко по каждому заданию</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted);font-size:1rem">›</span>
+          </div>
         </button>
-        <button class="home-card cheat" onclick="openView('view-cheat')">
-          <span class="hc-icon">📋</span>
-          <div class="hc-title">Шпаргалка</div>
-          <div class="hc-desc">Всё кратко в одном месте</div>
-          <span class="hc-badge g">Быстрый доступ</span>
+
+        <button class="home-card" style="border-color:rgba(255,108,123,.3);text-align:left" onclick="openView('view-menu-test')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.6rem">✏️</span>
+            <div>
+              <div class="hc-title" style="font-size:0.8rem">Тест</div>
+              <div class="hc-desc">По каждому заданию отдельно</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted);font-size:1rem">›</span>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ─── МЕНЮ: ТЕСТОВЫЕ ЗАДАНИЯ ─── -->
+    <div class="view" id="view-menu-tasks">
+      <p class="sec-label p" style="margin-bottom:16px">Выбери задание</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="home-card" style="border-color:rgba(95,255,176,.3);text-align:left" onclick="openView('view-9')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🌿</span>
+            <div>
+              <div class="hc-title">Задание 9</div>
+              <div class="hc-desc">Корни: проверяемые, непроверяемые, чередования</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(123,108,255,.3);text-align:left" onclick="openView('view-10')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔤</span>
+            <div>
+              <div class="hc-title">Задание 10</div>
+              <div class="hc-desc">Приставки: ПРЕ-/ПРИ-, З-/С-, НЕ-/НИ-</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(240,192,96,.3);text-align:left" onclick="openView('view-11')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">📚</span>
+            <div>
+              <div class="hc-title">Задание 11</div>
+              <div class="hc-desc">Суффиксы существительных, прилагательных, глаголов</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── МЕНЮ: ШПАРГАЛКИ ─── -->
+    <div class="view" id="view-menu-cheat">
+      <p class="sec-label g" style="margin-bottom:16px">Выбери задание</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="home-card" style="border-color:rgba(95,255,176,.3);text-align:left" onclick="openView('view-cheat-9')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🌿</span>
+            <div><div class="hc-title">Задание 9</div><div class="hc-desc">Корни — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(123,108,255,.3);text-align:left" onclick="openView('view-cheat-10')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔤</span>
+            <div><div class="hc-title">Задание 10</div><div class="hc-desc">Приставки — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(240,192,96,.3);text-align:left" onclick="openView('view-cheat-11')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">📚</span>
+            <div><div class="hc-title">Задание 11</div><div class="hc-desc">Суффиксы — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── МЕНЮ: ТЕСТЫ ─── -->
+    <div class="view" id="view-menu-test">
+      <p class="sec-label r" style="margin-bottom:16px">Выбери задание</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="home-card" style="border-color:rgba(95,255,176,.3);text-align:left" onclick="startTestFor('9')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🌿</span>
+            <div><div class="hc-title">Тест — Задание 9</div><div class="hc-desc">Корни слов · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(123,108,255,.3);text-align:left" onclick="startTestFor('10')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔤</span>
+            <div><div class="hc-title">Тест — Задание 10</div><div class="hc-desc">Приставки · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(240,192,96,.3);text-align:left" onclick="startTestFor('11')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">📚</span>
+            <div><div class="hc-title">Тест — Задание 11</div><div class="hc-desc">Суффиксы · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
         </button>
       </div>
     </div>
@@ -925,18 +1041,236 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
         </div>
         <div class="test-result" id="test-result">
           <div class="result-score" id="resultScore"></div>
-          <div class="result-label">правильных ответов из 15</div>
+          <div class="result-label"><span id="result-total">из 10</span> правильных ответов</div>
           <div class="result-msg" id="resultMsg"></div>
-          <button class="result-restart" onclick="startTest()">🔄 Пройти ещё раз</button>
-          <button class="result-restart" style="margin-top:8px" onclick="goBack()">← Вернуться в меню</button>
+          <button class="result-restart" onclick="goBack()">← Выбрать другой тест</button>
         </div>
       </div>
     </div>
 
-    <!-- ─── ШПАРГАЛКА ─── -->
-    <div class="view" id="view-cheat">
-      <p class="sec-label y" style="margin-bottom:16px">Задание 11 — Суффиксы</p>
+    <!-- ─── ЗАДАНИЕ 9 — КОРНИ ─── -->
+    <div class="view" id="view-9">
+      <div class="tabs" id="tabs9">
+        <button class="tab g active" data-sec="9-check">Проверяемые</button>
+        <button class="tab g" data-sec="9-uncheck">Непроверяемые</button>
+        <button class="tab g" data-sec="9-stress">Зависят от удар.</button>
+        <button class="tab g" data-sec="9-cons">Зависят от согл.</button>
+        <button class="tab g" data-sec="9-sense">Зависят от смысла</button>
+        <button class="tab g" data-sec="9-suf">Зависят от суфф.</button>
+      </div>
 
+      <!-- Проверяемые -->
+      <div class="subsection active" id="sub-9-check">
+        <p class="sec-label g">§1 — Проверяемая гласная</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Проверяемая гласная</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">💡</span><div class="cond-body"><div class="cond-rule">Гласная проверяется подбором однокоренного слова, где она стоит <strong>под ударением</strong></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">мол<em>о</em>ко → мол<em>о</em>чный (ударная О подтверждает написание)</div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">тр<em>а</em>ва → тр<em>а</em>вы, гр<em>о</em>за → гр<em>о</em>зы</div></div></div>
+          </div>
+          <div class="note">💡 Если проверочное слово подобрать нельзя — это <strong>непроверяемая</strong> гласная (словарное слово)</div>
+        </div>
+      </div>
+
+      <!-- Непроверяемые -->
+      <div class="subsection" id="sub-9-uncheck">
+        <p class="sec-label g">§2 — Непроверяемая гласная (словарные слова)</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Словарные слова ФИПИ</span><span class="rule-lbl">Только запомнить</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📖</span><div class="cond-body"><div class="cond-rule">Написание нельзя проверить — нужно <strong>запомнить или посмотреть в словаре</strong></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Трудные слова — А</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body"><div class="cond-rule">аб<em>и</em>туриент, аб<em>о</em>немент, <em>а</em>кварель, <em>а</em>ккомпанемент, <em>а</em>нн<em>о</em>тация, <em>а</em>пелляция, <em>а</em>тмосфера, <em>а</em>ттракцион</div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Трудные слова — Б–В</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body"><div class="cond-rule">б<em>а</em>дминтон, б<em>а</em>ссейн, б<em>и</em>рюзовый, б<em>ю</em>ллетень, в<em>е</em>стибюль, в<em>е</em>теран, в<em>и</em>негрет, в<em>и</em>ртуоз, в<em>о</em>кзал, в<em>о</em>ображение</div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Трудные слова — Г–К</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body"><div class="cond-rule">г<em>а</em>лерея, г<em>а</em>рмония, г<em>о</em>ризонт, инт<em>е</em>ллигент, к<em>а</em>мпания (мероприятие), к<em>о</em>мпания (люди), к<em>а</em>рикатура, к<em>о</em>лосс<em>а</em>льный, к<em>о</em>мфорт, к<em>о</em>ричневый</div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Трудные слова — П–Я</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body"><div class="cond-rule">п<em>а</em>норама, п<em>а</em>трiot, пр<em>е</em>зидент, пр<em>и</em>вилегия, р<em>е</em>жиссёр, р<em>е</em>месло, р<em>и</em>торика, р<em>о</em>весники, т<em>е</em>рритория, тр<em>а</em>мвай, ун<em>и</em>кальный, ф<em>и</em>олетовый, ш<em>о</em>ссе, ш<em>о</em>колад, эксп<em>е</em>римент</div></div></div>
+          </div>
+        </div>
+        <div class="exc">⚠️ Не путай: к<strong>а</strong>мпания (мероприятие) и к<strong>о</strong>мпания (группа людей / фирма)</div>
+      </div>
+
+      <!-- Зависят от ударения -->
+      <div class="subsection" id="sub-9-stress">
+        <p class="sec-label g">§3 — Чередование: зависит от ударения</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-ГОР-/-ГАР-, -ТВОР-/-ТВАР-, -КЛОН-/-КЛАН-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">´</span><div class="cond-body"><div class="cond-rule">Под <strong>ударением</strong> — пишем как слышим</div><div class="cond-exs"><span class="ex">з<em>а́</em>гар</span><span class="ex">тв<em>а́</em>рь</span><span class="ex">кл<em>а́</em>няться</span></div></div></div>
+            <div class="cond"><span class="cond-ico">‌˘</span><div class="cond-body"><div class="cond-rule">Без ударения → <strong>О</strong></div><div class="cond-exs"><span class="ex">г<em>о</em>реть</span><span class="ex">тв<em>о</em>рить</span><span class="ex">скл<em>о</em>нение</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>выгарки, изгарь, пригарь, утварь</strong></div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-ЗОР-/-ЗАР-</span><span class="rule-lbl">Наоборот!</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">´</span><div class="cond-body"><div class="cond-rule">Под <strong>ударением</strong> — как слышим</div><div class="cond-exs"><span class="ex">з<em>о́</em>ри</span><span class="ex">з<em>а́</em>рево</span></div></div></div>
+            <div class="cond"><span class="cond-ico">˘</span><div class="cond-body"><div class="cond-rule">Без ударения → <strong>А</strong></div><div class="cond-exs"><span class="ex">з<em>а</em>рница</span><span class="ex">оз<em>а</em>рить</span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Зависят от согласной -->
+      <div class="subsection" id="sub-9-cons">
+        <p class="sec-label g">§4 — Чередование: зависит от согласной</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-РОС-/-РАСТ-/-РАЩ-</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>СТ</strong> и <strong>Щ</strong> → <strong>А</strong></div><div class="cond-exs"><span class="ex">р<em>а</em>сти</span><span class="ex">р<em>а</em>щение</span><span class="ex">вы<em>ра</em>щивать</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>С</strong> (без Т) → <strong>О</strong></div><div class="cond-exs"><span class="ex">р<em>о</em>сла</span><span class="ex">р<em>о</em>сток ❌ — исключение!</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>отрасль, росток, ростовщик, Ростов, Ростислав</strong></div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-КАС-/-КОС(Н)-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Есть суффикс <strong>А</strong> → <strong>КАС</strong></div><div class="cond-exs"><span class="ex">к<em>а</em>саться</span><span class="ex">прик<em>а</em>саться</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Нет суффикса А → <strong>КОС</strong></div><div class="cond-exs"><span class="ex">к<em>о</em>снуться</span><span class="ex">прик<em>о</em>сновение</span></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-ЛАГ-/-ЛОЖ-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>Г</strong> → <strong>А</strong></div><div class="cond-exs"><span class="ex">пол<em>а</em>гать</span><span class="ex">сл<em>а</em>гаемое</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>Ж</strong> → <strong>О</strong></div><div class="cond-exs"><span class="ex">пол<em>о</em>жить</span><span class="ex">изл<em>о</em>жение</span></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-СКАК-/-СКОЧ-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>К</strong> → <strong>А</strong></div><div class="cond-exs"><span class="ex">ск<em>а</em>кать</span><span class="ex">поск<em>а</em>кать</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Перед <strong>Ч</strong> → <strong>О</strong></div><div class="cond-exs"><span class="ex">выск<em>о</em>чить</span><span class="ex">поск<em>о</em>чить</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>скачок, скачу</strong></div>
+        </div>
+      </div>
+
+      <!-- Зависят от смысла -->
+      <div class="subsection" id="sub-9-sense">
+        <p class="sec-label g">§5 — Чередование: зависит от смысла</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-МАК-/-МОК-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">🖊</span><div class="cond-body"><div class="cond-rule"><strong>МАК</strong> — погружать в жидкость</div><div class="cond-exs"><span class="ex">м<em>а</em>кать хлеб в мёд</span></div></div></div>
+            <div class="cond"><span class="cond-ico">💧</span><div class="cond-body"><div class="cond-rule"><strong>МОК</strong> — пропускать жидкость, намокать</div><div class="cond-exs"><span class="ex">м<em>о</em>кнуть под дождём</span></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-РАВН-/-РОВН-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">⚖</span><div class="cond-body"><div class="cond-rule"><strong>РАВН</strong> — равный, одинаковый</div><div class="cond-exs"><span class="ex">ур<em>а</em>внение</span><span class="ex">ср<em>а</em>внить</span></div></div></div>
+            <div class="cond"><span class="cond-ico">📏</span><div class="cond-body"><div class="cond-rule"><strong>РОВН</strong> — ровный, гладкий</div><div class="cond-exs"><span class="ex">р<em>о</em>внять дорогу</span><span class="ex">подр<em>о</em>внять</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>равнина, ровесник, поровну, уровень</strong></div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-ПЛАВ-/-ПЛОВ-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">🏊</span><div class="cond-body"><div class="cond-rule"><strong>ПЛАВ</strong> — пишем всегда</div><div class="cond-exs"><span class="ex">пл<em>а</em>вать</span><span class="ex">пл<em>а</em>вучий</span></div></div></div>
+            <div class="cond"><span class="cond-ico">⚠️</span><div class="cond-body"><div class="cond-rule"><strong>ПЛОВ</strong> — только в исключениях</div><div class="cond-exs"><span class="ex">пл<em>о</em>вец</span><span class="ex">пл<em>о</em>вчиха</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>пловец, пловчиха, плывуны</strong></div>
+        </div>
+      </div>
+
+      <!-- Зависят от суффикса -->
+      <div class="subsection" id="sub-9-suf">
+        <p class="sec-label g">§6 — Чередование Е/И: зависит от суффикса А</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">-БИР-/-БЕР-, -ДИР-/-ДЕР-, -МИР-/-МЕР- и др.</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">А</span><div class="cond-body"><div class="cond-rule">За корнем стоит суффикс <strong>А</strong> → пишем <strong>И</strong></div><div class="cond-exs"><span class="ex">зад<em>и</em>рать</span><span class="ex">разб<em>и</em>рать</span><span class="ex">выж<em>и</em>гать</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Суффикса А нет → пишем <strong>Е</strong></div><div class="cond-exs"><span class="ex">зад<em>е</em>рёт</span><span class="ex">разб<em>е</em>рёт</span><span class="ex">выж<em>е</em>чь</span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>сочетать, сочетание</strong></div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Все корни с Е/И</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">📋</span><div class="cond-body"><div class="cond-rule">-бир-/-бер-, -дир-/-дер-, -мир-/-мер-, -пир-/-пер-, -тир-/-тер-, -блист-/-блест-, -жиг-/-жег-</div></div></div>
+            <div class="cond"><span class="cond-ico">📋</span><div class="cond-body"><div class="cond-rule">А также: -им-/-а(я)-: пон<em>и</em>мать → пон<em>я</em>тый, сж<em>и</em>мать → сж<em>а</em>тие</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА 9 ─── -->
+    <div class="view" id="view-cheat-9">
+      <p class="sec-label g" style="margin-bottom:16px">Задание 9 — Корни</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Чередование: ударение</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-ГОР-/-ГАР-</span><span class="cheat-val">Без удар. → <strong>О</strong>: гореть. Искл: выгарки</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-ЗОР-/-ЗАР-</span><span class="cheat-val">Без удар. → <strong>А</strong>: зарница (наоборот!)</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-КЛОН-/-КЛАН-</span><span class="cheat-val">Без удар. → <strong>О</strong>: склонение</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Чередование: согласная</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-РАСТ-/-РОС-</span><span class="cheat-val">Перед СТ/Щ → <strong>А</strong>, перед С → <strong>О</strong>. Искл: росток, отрасль</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-ЛАГ-/-ЛОЖ-</span><span class="cheat-val">Перед Г → <strong>А</strong>, перед Ж → <strong>О</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-КАС-/-КОС-</span><span class="cheat-val">Есть А → <strong>КАС</strong>, нет А → <strong>КОС</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-СКАК-/-СКОЧ-</span><span class="cheat-val">Перед К → <strong>А</strong>, перед Ч → <strong>О</strong>. Искл: скачок</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Чередование: смысл</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-МАК-/-МОК-</span><span class="cheat-val">Макать = погружать, мокнуть = намокать</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-РАВН-/-РОВН-</span><span class="cheat-val">Равный = одинаковый, ровный = гладкий</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">-ПЛАВ-/-ПЛОВ-</span><span class="cheat-val">Плав- всегда, плов- только: пловец, пловчиха</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Чередование Е/И: суффикс А</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">Есть суфф. А</span><span class="cheat-val">→ пишем <strong>И</strong>: задирать, разбирать</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">Нет суфф. А</span><span class="cheat-val">→ пишем <strong>Е</strong>: задерёт, разберёт</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">Корни</span><span class="cheat-val">бир/бер, дир/дер, мир/мер, пир/пер, тир/тер, блист/блест, жиг/жег</span></div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА 10 ─── -->
+    <div class="view" id="view-cheat-10">
+      <p class="sec-label p" style="margin-bottom:16px">Задание 10 — Приставки</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>ПРЕ- / ПРИ-</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРИ-</span><span class="cheat-val">Приближение, присоединение, неполнота, рядом</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРЕ-</span><span class="cheat-val">= очень / = ПЕРЕ-</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>З- / С- на конце приставки</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Звонкая → З</span><span class="cheat-val">разбить, безdomный, извлечь</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Глухая → С</span><span class="cheat-val">раскрыть, бесплатный, исходить</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Приставка С-</span><span class="cheat-val">Всегда <strong>С-</strong>! сбить, сделать, сжечь</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>НЕ- / НИ-</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">НЕ-</span><span class="cheat-val">Под ударением: нéкто, нéгде</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">НИ-</span><span class="cheat-val">Без ударения: никтó, нигдé</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>Неизменяемые приставки</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Запомни</span><span class="cheat-val"><strong>В, ВЫ, ДО, ЗА, НА, НАД, О, ОБ, ОТ, ПО, ПОД, ПРО, СУ, У, ПЕРЕ</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Примеры</span><span class="cheat-val">войти, выйти, закрыть, написать, надстроить, отдать, прочитать</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Важно</span><span class="cheat-val">ОТ- всегда ОТ- (не ОД-): отдать, отбить</span></div>
+      </div>
+    </div>
+    <div class="view" id="view-cheat-11">
+      <p class="sec-label y" style="margin-bottom:16px">Задание 11 — Суффиксы</p>
       <div class="cheat-section">
         <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--y)"></span>Существительные</div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИЦ- / -ЕЦ-</span><span class="cheat-val">М.р. → <strong>-ЕЦ-</strong>, Ж.р. → <strong>-ИЦ-</strong>, Ср.р. удар. до → <strong>-ИЦ-</strong>, после → <strong>-ЕЦ-</strong></span></div>
@@ -945,7 +1279,6 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
         <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИК- / -ЕК-</span><span class="cheat-val">И сохр. в р.п. → <strong>-ИК-</strong>, выпадает → <strong>-ЕК-</strong></span></div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ЧИК- / -ЩИК-</span><span class="cheat-val">Д Т З С Ж → <strong>-ЧИК-</strong>, остальные → <strong>-ЩИК-</strong></span></div>
       </div>
-
       <div class="cheat-section">
         <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>Прилагательные</div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-ЧИВ- / -ЛИВ-</span><span class="cheat-val">Всегда «И»: заносчивый, удачливый</span></div>
@@ -953,35 +1286,20 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
         <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-ИСТ- / -ЧАТ-</span><span class="cheat-val">Неизменяемые: породистый, зубчатый</span></div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-К- / -СК-</span><span class="cheat-val">Осн. К Ц Ч / кр.ф. → <strong>-К-</strong>, иначе → <strong>-СК-</strong></span></div>
       </div>
-
       <div class="cheat-section">
         <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--r)"></span>Глаголы</div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--r)">-ОВА- / -ЕВА-</span><span class="cheat-val">1 л. ед.ч. → <strong>-ую/-юю</strong></span></div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--r)">-ЫВА- / -ИВА-</span><span class="cheat-val">1 л. ед.ч. суффикс <strong>сохраняется</strong></span></div>
       </div>
-
       <div class="cheat-section">
         <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Наречия</div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">ИЗ- ДО- С-</span><span class="cheat-val">Суффикс <strong>-А-</strong>: издавна, досыта</span></div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">ЗА- НА- В-</span><span class="cheat-val">Суффикс <strong>-О-</strong>: задолго, вправо</span></div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">В- НА- + -Е-</span><span class="cheat-val">вкратце, налегке</span></div>
       </div>
-
       <div class="cheat-section">
         <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>О/Ё после шипящих</div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">От глагола</span><span class="cheat-val">→ <strong>Ё</strong>: тушёнка, сгущёнка</span></div>
         <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">Не от глагола</span><span class="cheat-val">Под удар. → <strong>О</strong>: девчонка, ручонка</span></div>
-      </div>
-
-      <p class="sec-label p" style="margin: 20px 0 16px">Задание 10 — Приставки</p>
-
-      <div class="cheat-section">
-        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>Все правила</div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРИ-</span><span class="cheat-val">Приближение, присоединение, неполнота, рядом</span></div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРЕ-</span><span class="cheat-val">= очень / = ПЕРЕ-</span></div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">З- / С-</span><span class="cheat-val">Звонкая → З, глухая → С (без-/бес-, раз-/рас-…)</span></div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Приставка С-</span><span class="cheat-val">Всегда <strong>С-</strong>! Приставки З- не существует</span></div>
-        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">НЕ- / НИ-</span><span class="cheat-val">Под удар. → <strong>НЕ-</strong>, без удар. → <strong>НИ-</strong></span></div>
       </div>
     </div>
 
@@ -1004,7 +1322,6 @@ if (tg) {
 // NAVIGATION
 // ══════════════════════════════════════
 let history = [];
-let currentTask = 11;
 
 function openView(viewId) {
   const current = document.querySelector('.view.active');
@@ -1012,7 +1329,6 @@ function openView(viewId) {
   showView(viewId);
   document.getElementById('scroll').scrollTop = 0;
   updateHeader(viewId);
-  if (viewId === 'view-test') startTest();
 }
 
 function showView(viewId) {
@@ -1037,11 +1353,17 @@ function updateHeader(viewId) {
   backBtn.classList.toggle('hidden', isHome);
 
   const titles = {
-    'view-home':  ['ЕГЭ 2026 · Русский язык', 'Задания 10 и 11'],
-    'view-11':    ['Задание 11', 'Суффиксы'],
-    'view-10':    ['Задание 10', 'Приставки'],
-    'view-test':  ['Тест', 'Задания 10 и 11'],
-    'view-cheat': ['Шпаргалка', 'Быстрый доступ'],
+    'view-home':        ['ЕГЭ 2026 · Русский язык', 'Задания 9, 10 и 11'],
+    'view-menu-tasks':  ['Тестовые задания', 'Выбери задание'],
+    'view-menu-cheat':  ['Шпаргалки', 'Выбери задание'],
+    'view-menu-test':   ['Тест', 'Выбери задание'],
+    'view-9':           ['Задание 9', 'Корни слов'],
+    'view-10':          ['Задание 10', 'Приставки'],
+    'view-11':          ['Задание 11', 'Суффиксы'],
+    'view-test':        ['Тест', ''],
+    'view-cheat-9':     ['Шпаргалка', 'Задание 9 — Корни'],
+    'view-cheat-10':    ['Шпаргалка', 'Задание 10 — Приставки'],
+    'view-cheat-11':    ['Шпаргалка', 'Задание 11 — Суффиксы'],
   };
   const [t, s] = titles[viewId] || ['ЕГЭ 2026', ''];
   title.textContent = t;
@@ -1071,30 +1393,59 @@ document.querySelectorAll('.tabs').forEach(tabsEl => {
 });
 
 // ══════════════════════════════════════
-// TEST DATA
+// TEST DATA — по заданиям
 // ══════════════════════════════════════
-const TESTS = [
-  { q: 'Задание 11. Какой суффикс в слове «шалашик»?', opts: ['-ЕК-', '-ИК-'], correct: 1, exp: 'Шалашик → шалашика (И сохраняется в р.п.) → суффикс -ИК-.' },
-  { q: 'Задание 11. Как пишется: «ноч_вать»?', opts: ['ночовать', 'ночевать'], correct: 1, exp: '(Я) ночую — окончание -УЮ → пишем -ЕВА- → ночевать.' },
-  { q: 'Задание 11. Суффикс в слове «умничка» (от умница)?', opts: ['-ЕЧК-', '-ИЧК-'], correct: 1, exp: 'Образовано от слова на -ИЦА (умница) → суффикс -ИЧК-.' },
-  { q: 'Задание 11. Как пишется: «барабан_ик»?', opts: ['барабанчик', 'барабанщик'], correct: 1, exp: 'Буква Н не входит в Д Т З С Ж → пишем -ЩИК-: барабанщик.' },
-  { q: 'Задание 11. Суффикс наречия «издавна»?', opts: ['-О-', '-А-'], correct: 1, exp: 'Приставка ИЗ- → суффикс -А-: издавна.' },
-  { q: 'Задание 11. Как пишется: «тушён_а»?', opts: ['тушонка', 'тушёнка'], correct: 1, exp: 'От глагола «тушить» → пишем Ё: тушёнка.' },
-  { q: 'Задание 11. -ЧИК- или -ЩИК-: «лёт_ик»?', opts: ['лётщик', 'лётчик'], correct: 1, exp: 'Буква Т входит в Д Т З С Ж → пишем -ЧИК-: лётчик.' },
-  { q: 'Задание 10. Как пишется: «пре/при_открыть окно»?', opts: ['преоткрыть', 'приоткрыть'], correct: 1, exp: 'ПРИ- = неполнота действия (слегка открыть) → приоткрыть.' },
-  { q: 'Задание 10. Как пишется: «рас/раз_крыть»?', opts: ['разкрыть', 'раскрыть'], correct: 1, exp: 'К — глухая согласная → пишем С: раскрыть.' },
-  { q: 'Задание 10. Как пишется: «с/з_бить»?', opts: ['сбить', 'збить'], correct: 0, exp: 'Приставка С- неизменяемая! В русском языке нет приставки З-.' },
-  { q: 'Задание 10. НЕ- или НИ-: «н_где не был»?', opts: ['нЕгде', 'нИгде'], correct: 1, exp: 'Нигде — ударение на последний слог, не на приставку → НИ-: нигде.' },
-  { q: 'Задание 10. Как пишется: «пре/при_красный»?', opts: ['прикрасный', 'прекрасный'], correct: 1, exp: 'ПРЕ- = очень (очень красивый) → прекрасный.' },
-  { q: 'Задание 10. Как пишется: «без/бес_шумный»?', opts: ['безшумный', 'бесшумный'], correct: 1, exp: 'Ш — глухая согласная → пишем С: бесшумный.' },
-  { q: 'Задание 10. Как пишется: «пре/при_школьный участок»?', opts: ['прешкольный', 'пришкольный'], correct: 1, exp: 'ПРИ- = нахождение рядом (рядом со школой) → пришкольный.' },
-  { q: 'Задание 10. НЕ- или НИ-: «н_кто постучал»?', opts: ['нЕкто', 'нИкто'], correct: 0, exp: 'Нéкто — ударение падает на приставку НЕ → нéкто.' },
-];
+const ALL_TESTS = {
+  '9': [
+    { q: 'Как пишется: «г_реть на солнце»?', opts: ['гАреть', 'гОреть'], correct: 1, exp: 'Корень -ГОР-/-ГАР-: без ударения → О → гореть.' },
+    { q: 'Как пишется: «з_рница»?', opts: ['зОрница', 'зАрница'], correct: 1, exp: 'Корень -ЗОР-/-ЗАР-: без ударения → А (исключение из правила!) → зарница.' },
+    { q: 'Как пишется: «р_сти»?', opts: ['рОсти', 'рАсти'], correct: 1, exp: 'Корень -РОС-/-РАСТ-: перед СТ → А → расти.' },
+    { q: 'Как пишется: «пол_гать»?', opts: ['полАгать', 'полОгать'], correct: 0, exp: 'Корень -ЛАГ-/-ЛОЖ-: перед Г → А → полагать.' },
+    { q: 'Как пишется: «к_саться»?', opts: ['кОсаться', 'кАсаться'], correct: 1, exp: 'Корень -КАС-/-КОС-: есть суффикс А → КАС → касаться.' },
+    { q: 'Как пишется: «м_кать хлеб»?', opts: ['мОкать', 'мАкать'], correct: 1, exp: 'Корень -МАК-: погружать в жидкость → МАК → макать.' },
+    { q: 'Как пишется: «р_внять дорогу»?', opts: ['рАвнять', 'рОвнять'], correct: 1, exp: 'Корень -РОВН-: делать ровным, гладким → РОВН → ровнять.' },
+    { q: 'Как пишется: «задирАть» → «задЕрёт»?', opts: ['задИрать / задЕрёт', 'задЕрать / задЕрёт'], correct: 0, exp: 'Корень -ДИР-/-ДЕР-: есть суффикс А → И → задИрать. Без А → Е → задЕрёт.' },
+    { q: 'Как пишется: «выск_чить»?', opts: ['выскАчить', 'выскОчить'], correct: 1, exp: 'Корень -СКАК-/-СКОЧ-: перед Ч → О → выскочить.' },
+    { q: 'Как пишется: «скл_нение»?', opts: ['склАнение', 'склОнение'], correct: 1, exp: 'Корень -КЛОН-/-КЛАН-: без ударения → О → склонение.' },
+  ],
+  '10': [
+    { q: 'Как пишется: «пре/при_открыть окно»?', opts: ['преоткрыть', 'приоткрыть'], correct: 1, exp: 'ПРИ- = неполнота действия (слегка открыть) → приоткрыть.' },
+    { q: 'Как пишется: «рас/раз_крыть»?', opts: ['разкрыть', 'раскрыть'], correct: 1, exp: 'К — глухая → пишем С → раскрыть.' },
+    { q: 'Как пишется: «с/з_бить»?', opts: ['сбить', 'збить'], correct: 0, exp: 'Приставка С- неизменяемая! В русском языке нет приставки З-.' },
+    { q: 'НЕ- или НИ-: «н_где не был»?', opts: ['нЕгде', 'нИгде'], correct: 1, exp: 'Нигдé — ударение на Е в конце, не на приставку → НИ-.' },
+    { q: 'Как пишется: «пре/при_красный»?', opts: ['прикрасный', 'прекрасный'], correct: 1, exp: 'ПРЕ- = очень (очень красивый) → прекрасный.' },
+    { q: 'Как пишется: «без/бес_шумный»?', opts: ['безшумный', 'бесшумный'], correct: 1, exp: 'Ш — глухая → пишем С → бесшумный.' },
+    { q: 'Как пишется: «пре/при_школьный»?', opts: ['прешкольный', 'пришкольный'], correct: 1, exp: 'ПРИ- = нахождение рядом → пришкольный.' },
+    { q: 'НЕ- или НИ-: «н_кто постучал»?', opts: ['нЕкто', 'нИкто'], correct: 0, exp: 'Нéкто — ударение на НЕ → нéкто.' },
+    { q: 'Как пишется: «пре/при_рвать беседу»?', opts: ['прирвать', 'прервать'], correct: 1, exp: 'ПРЕ- = ПЕРЕ- (перервать) → прервать.' },
+    { q: 'Как пишется: «из/ис_пытать»?', opts: ['изпытать', 'испытать'], correct: 1, exp: 'П — глухая → пишем С → испытать.' },
+  ],
+  '11': [
+    { q: 'Какой суффикс в слове «шалашик»?', opts: ['-ЕК-', '-ИК-'], correct: 1, exp: 'Шалашик → шалашика (И сохраняется в р.п.) → -ИК-.' },
+    { q: 'Как пишется: «ноч_вать»?', opts: ['ночовать', 'ночевать'], correct: 1, exp: '(Я) ночую → окончание -УЮ → пишем -ЕВА- → ночевать.' },
+    { q: 'Суффикс в слове «умничка» (от умница)?', opts: ['-ЕЧК-', '-ИЧК-'], correct: 1, exp: 'Образовано от слова на -ИЦА → суффикс -ИЧК-.' },
+    { q: 'Как пишется: «барабан_ик»?', opts: ['барабанчик', 'барабанщик'], correct: 1, exp: 'Буква Н не входит в Д Т З С Ж → пишем -ЩИК-.' },
+    { q: 'Суффикс наречия «издавна»?', opts: ['-О-', '-А-'], correct: 1, exp: 'Приставка ИЗ- → суффикс -А-: издавна.' },
+    { q: 'Как пишется: «тушён_а»?', opts: ['тушонка', 'тушёнка'], correct: 1, exp: 'От глагола «тушить» → пишем Ё: тушёнка.' },
+    { q: '-ЧИК- или -ЩИК-: «лёт_ик»?', opts: ['лётщик', 'лётчик'], correct: 1, exp: 'Буква Т входит в Д Т З С Ж → пишем -ЧИК-: лётчик.' },
+    { q: 'Как пишется: «скруч_вать»?', opts: ['скручовать', 'скручивать'], correct: 1, exp: '(Я) скручиваю — суффикс сохраняется → пишем -ИВА-.' },
+    { q: 'Суффикс в слове «дружочек»?', opts: ['-ИК-', '-ЕК-'], correct: 1, exp: 'Дружочек → дружочка (гласная выпадает) → суффикс -ЕК-.' },
+    { q: 'Как пишется: «кровел_щик»?', opts: ['кровелщик', 'кровельщик'], correct: 1, exp: 'Ь перед -ЩИК- пишется только после Л → кровельщик.' },
+  ],
+};
 
-// ══════════════════════════════════════
-// TEST LOGIC
-// ══════════════════════════════════════
-let testOrder = [], testIdx = 0, score = 0, answered = false;
+let currentTestSet = [], testIdx = 0, score = 0, answered = false;
+
+function startTestFor(zadanie) {
+  currentTestSet = shuffle([...ALL_TESTS[zadanie]]);
+  testIdx = 0; score = 0;
+  document.getElementById('test-result').classList.remove('show');
+  document.getElementById('test-body').style.display = 'block';
+  const label = { '9': 'Задание 9 — Корни', '10': 'Задание 10 — Приставки', '11': 'Задание 11 — Суффиксы' };
+  openView('view-test');
+  document.getElementById('headerSub').textContent = label[zadanie];
+  renderQuestion();
+}
 
 function shuffle(arr) {
   const a = [...arr];
@@ -1105,50 +1456,46 @@ function shuffle(arr) {
   return a;
 }
 
-function startTest() {
-  testOrder = shuffle([...Array(TESTS.length).keys()]);
-  testIdx = 0; score = 0;
-  document.getElementById('test-result').classList.remove('show');
-  document.getElementById('test-body').style.display = 'block';
-  renderQuestion();
-}
-
 function renderQuestion() {
-  const q = TESTS[testOrder[testIdx]];
+  const q = currentTestSet[testIdx];
   answered = false;
+  const total = currentTestSet.length;
+  document.getElementById('testFill').style.width = (testIdx / total * 100) + '%';
+  document.getElementById('testCounter').textContent = `ВОПРОС ${testIdx + 1} ИЗ ${total}`;
+  document.getElementById('testQ').innerHTML = q.q;
 
-  document.getElementById('testFill').style.width = (testIdx / TESTS.length * 100) + '%';
-  document.getElementById('testCounter').textContent = `ВОПРОС ${testIdx + 1} ИЗ ${TESTS.length}`;
-  document.getElementById('testQ').innerHTML = q.q.replace(/(пре\/при|рас\/раз|с\/з|НЕ- или НИ-|без\/бес)/gi, s => `<span class="highlight">${s}</span>`);
+  // Перемешиваем варианты ответов
+  const indices = shuffle([...Array(q.opts.length).keys()]);
+  const newCorrect = indices.indexOf(q.correct);
 
   const optsEl = document.getElementById('testOpts');
   optsEl.innerHTML = '';
-  q.opts.forEach((opt, i) => {
+  indices.forEach((origIdx, newIdx) => {
     const btn = document.createElement('button');
     btn.className = 'test-opt';
-    btn.textContent = opt;
-    btn.onclick = () => answerQuestion(i);
+    btn.textContent = q.opts[origIdx];
+    btn.onclick = () => answerQuestion(newIdx, newCorrect);
     optsEl.appendChild(btn);
   });
 
   document.getElementById('testExp').classList.remove('show');
   document.getElementById('testNext').classList.remove('show');
-  document.getElementById('testNext').textContent = testIdx < TESTS.length - 1 ? 'Следующий вопрос →' : 'Посмотреть результат →';
+  document.getElementById('testNext').textContent = testIdx < total - 1 ? 'Следующий вопрос →' : 'Посмотреть результат →';
 }
 
-function answerQuestion(chosen) {
+function answerQuestion(chosen, correct) {
   if (answered) return;
   answered = true;
-  const q = TESTS[testOrder[testIdx]];
+  const q = currentTestSet[testIdx];
   const opts = document.querySelectorAll('.test-opt');
 
   opts.forEach((btn, i) => {
     btn.classList.add('disabled');
-    if (i === q.correct) btn.classList.add('correct');
+    if (i === correct) btn.classList.add('correct');
     else if (i === chosen) btn.classList.add('wrong');
   });
 
-  if (chosen === q.correct) score++;
+  if (chosen === correct) score++;
 
   document.getElementById('testExpText').textContent = q.exp;
   document.getElementById('testExp').classList.add('show');
@@ -1161,7 +1508,7 @@ function answerQuestion(chosen) {
 
 function nextQuestion() {
   testIdx++;
-  if (testIdx >= TESTS.length) {
+  if (testIdx >= currentTestSet.length) {
     showResult();
   } else {
     renderQuestion();
@@ -1173,10 +1520,11 @@ function showResult() {
   document.getElementById('test-body').style.display = 'none';
   const resultEl = document.getElementById('test-result');
   resultEl.classList.add('show');
+  const total = currentTestSet.length;
   document.getElementById('resultScore').textContent = score;
-
+  document.getElementById('result-total').textContent = `из ${total}`;
+  const pct = score / total;
   let msg;
-  const pct = score / TESTS.length;
   if (pct === 1)        msg = '🏆 Идеально! Ты готов к ЕГЭ!';
   else if (pct >= 0.8)  msg = '🎉 Отличный результат!';
   else if (pct >= 0.6)  msg = '📚 Неплохо, но стоит повторить';
