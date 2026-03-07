@@ -6,7 +6,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # ── Вставь сюда свой токен от @BotFather
 import os
-BOT_TOKEN = os.getenv("8603842589:AAEC9jYDXX08CJLdDJvxO2-L70gVsTHbfFo")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # ── URL твоего задеплоенного мини-приложения (см. README)
 WEBAPP_URL = "https://ytoch324.github.io/TOT_SAMbIUEGEHELPER/"
