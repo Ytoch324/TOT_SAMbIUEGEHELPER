@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ЕГЭ 2026 — Русский язык</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --bg:      #0e0e14;
+  --card:    #16161f;
+  --card2:   #1c1c28;
+  --text:    #e8e6f0;
+  --muted:   #7a7890;
+  --border:  #2a2840;
+  --y:  #f0c060;
+  --p:  #7b6cff;
+  --r:  #ff6c7b;
+  --g:  #5fffb0;
+  --o:  #ff9f5a;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Golos Text', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+  overscroll-behavior: none;
+}
+
+button { background: none; border: none; cursor: pointer; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+
+/* ═══════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════ */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  height: 100vh;
+}
+
+/* ─── HEADER ─── */
+#header {
+  flex-shrink: 0;
+  padding: 14px 16px 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 10;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.back-btn {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: opacity .15s;
+}
+.back-btn:active { opacity: .6; }
+.back-btn.hidden { visibility: hidden; pointer-events: none; }
+
+.header-title {
+  flex: 1;
+  text-align: center;
+}
+
+.header-title h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+.header-title p {
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+/* ─── TASK SWITCHER ─── */
+.task-switcher {
+  display: flex;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.task-btn {
+  flex: 1;
+  padding: 7px 6px;
+  border-radius: 9px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition: all .2s;
+  text-align: center;
+}
+.task-btn.active {
+  color: #0e0e14;
+  background: var(--y);
+}
+.task-btn:nth-child(2).active { background: var(--p); color: #fff; }
+
+/* ─── SCROLL AREA ─── */
+#scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding: 16px 14px calc(16px + var(--safe-bottom));
+}
+#scroll::-webkit-scrollbar { display: none; }
+
+/* ─── SECTION VIEW ─── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ─── TOPIC TABS ─── */
+.tabs {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+  margin-bottom: 18px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: all .2s;
+}
+.tab.active { border-color: transparent; color: #0e0e14; }
+.tab.y.active  { background: var(--y); }
+.tab.p.active  { background: var(--p); color: #fff; }
+.tab.r.active  { background: var(--r); color: #fff; }
+.tab.g.active  { background: var(--g); }
+.tab.o.active  { background: var(--o); }
+
+/* ─── SECTION LABEL ─── */
+.sec-label {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-left: 2px;
+}
+.sec-label.y { color: var(--y); }
+.sec-label.p { color: var(--p); }
+.sec-label.r { color: var(--r); }
+.sec-label.g { color: var(--g); }
+.sec-label.o { color: var(--o); }
+
+.subsection { display: none; }
+.subsection.active { display: block; }
+
+/* ─── RULE CARD ─── */
+.rule-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 16px 16px 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.rule-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  border-radius: 4px 0 0 4px;
+}
+.rule-card.y::before { background: var(--y); }
+.rule-card.p::before { background: var(--p); }
+.rule-card.r::before { background: var(--r); }
+.rule-card.g::before { background: var(--g); }
+.rule-card.o::before { background: var(--o); }
+
+.rule-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 3px 12px;
+  border-radius: 7px;
+  word-break: break-word;
+}
+.badge.y { background: rgba(240,192,96,.15); color: var(--y); border: 1px solid rgba(240,192,96,.3); }
+.badge.p { background: rgba(123,108,255,.15); color: var(--p); border: 1px solid rgba(123,108,255,.3); }
+.badge.r { background: rgba(255,108,123,.15); color: var(--r); border: 1px solid rgba(255,108,123,.3); }
+.badge.g { background: rgba(95,255,176,.15); color: var(--g); border: 1px solid rgba(95,255,176,.3); }
+.badge.o { background: rgba(255,159,90,.15); color: var(--o); border: 1px solid rgba(255,159,90,.3); }
+
+.rule-lbl {
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-weight: 500;
+  padding-top: 4px;
+}
+
+/* ─── CONDITIONS GRID ─── */
+.conds { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 540px) {
+  .conds.two { grid-template-columns: 1fr 1fr; }
+  .conds.three { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.cond {
+  background: var(--card2);
+  border-radius: 9px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.cond-ico { font-size: .9rem; flex-shrink: 0; margin-top: 1px; }
+.cond-body { min-width: 0; flex: 1; }
+.cond-rule {
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 500;
+  word-break: break-word;
+}
+.cond-rule strong { font-weight: 700; }
+.cond-exs {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.ex {
+  font-size: 0.72rem;
+  background: rgba(255,255,255,.06);
+  border-radius: 5px;
+  padding: 2px 8px;
+  color: #ccc;
+  font-style: italic;
+  word-break: break-word;
+}
+.ex em { font-style: normal; font-weight: 700; color: #fff; }
+
+/* ─── ALGO ─── */
+.algo {
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 10px;
+}
+.algo-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.algo-steps { display: flex; flex-direction: column; gap: 9px; }
+.algo-step { display: flex; gap: 10px; align-items: flex-start; }
+.step-n {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  font-size: .65rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Unbounded', sans-serif;
+}
+.step-n.y { background: rgba(240,192,96,.2); color: var(--y); }
+.step-n.r { background: rgba(255,108,123,.2); color: var(--r); }
+.step-n.o { background: rgba(255,159,90,.2); color: var(--o); }
+.step-txt {
+  font-size: 0.82rem; line-height: 1.5; color: var(--text);
+  padding-top: 2px; min-width: 0; flex: 1; word-break: break-word;
+}
+
+/* ─── NOTE / EXCEPTION ─── */
+.note {
+  background: rgba(123,108,255,.08);
+  border: 1px solid rgba(123,108,255,.25);
+  border-radius: 9px;
+  padding: 10px 13px;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #b0a8ff;
+  word-break: break-word;
+  line-height: 1.5;
+}
+.exc {
+  background: rgba(255,108,123,.08);
+  border: 1px solid rgba(255,108,123,.25);
+  border-radius: 9px;
+  padding: 10px 13px;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--r);
+  word-break: break-word;
+  line-height: 1.5;
+}
+.exc strong { color: #fff; }
+.note strong { color: #fff; }
+
+/* ═══════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════ */
+.home-hero {
+  text-align: center;
+  padding: 24px 8px 20px;
+  position: relative;
+}
+.home-hero::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(123,108,255,.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+.home-hero h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.3rem, 6vw, 2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.home-hero h1 span { color: var(--y); }
+.home-hero p {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.home-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: left;
+  transition: transform .15s, border-color .15s;
+  position: relative;
+  overflow: hidden;
+}
+.home-card:active { transform: scale(.97); }
+.home-card::after {
+  content: '';
+  position: absolute; bottom: 0; right: 0;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  opacity: .07;
+}
+.home-card.t11::after { background: var(--y); }
+.home-card.t10::after { background: var(--p); }
+.home-card.test::after { background: var(--r); }
+.home-card.cheat::after { background: var(--g); }
+
+.home-card:hover { border-color: #3a3860; }
+
+.hc-icon {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.hc-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.hc-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+.hc-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.6rem;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.hc-badge.y { background: rgba(240,192,96,.15); color: var(--y); }
+.hc-badge.p { background: rgba(123,108,255,.15); color: var(--p); }
+.hc-badge.r { background: rgba(255,108,123,.15); color: var(--r); }
+.hc-badge.g { background: rgba(95,255,176,.15); color: var(--g); }
+
+/* ═══════════════════════════════════════
+   TEST SCREEN
+═══════════════════════════════════════ */
+.test-wrap { max-width: 500px; margin: 0 auto; }
+
+.test-progress-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.test-progress-fill {
+  height: 100%;
+  background: var(--r);
+  border-radius: 2px;
+  transition: width .3s ease;
+}
+
+.test-counter {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.6rem;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin-bottom: 16px;
+}
+
+.test-q {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.test-q .highlight { color: var(--r); font-weight: 700; }
+
+.test-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
+
+.test-opt {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: all .2s;
+  width: 100%;
+}
+.test-opt:active { transform: scale(.98); }
+.test-opt.correct { background: rgba(95,255,176,.12); border-color: rgba(95,255,176,.5); color: var(--g); }
+.test-opt.wrong { background: rgba(255,108,123,.12); border-color: rgba(255,108,123,.5); color: var(--r); }
+.test-opt.disabled { pointer-events: none; opacity: .5; }
+.test-opt.correct.disabled { opacity: 1; }
+.test-opt.wrong.disabled { opacity: 1; }
+
+.test-explanation {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: none;
+}
+.test-explanation.show { display: block; }
+.test-explanation .exp-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.test-next-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--r);
+  color: #fff;
+  border-radius: 12px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: opacity .15s;
+  display: none;
+}
+.test-next-btn.show { display: block; }
+.test-next-btn:active { opacity: .8; }
+
+/* result */
+.test-result {
+  text-align: center;
+  padding: 24px 8px;
+  display: none;
+}
+.test-result.show { display: block; }
+.result-score {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--y);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.result-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.result-msg {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.result-restart {
+  width: 100%;
+  padding: 14px;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  border-radius: 12px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin-top: 16px;
+  transition: border-color .2s;
+}
+.result-restart:active { opacity: .8; }
+
+/* ═══════════════════════════════════════
+   CHEATSHEET SCREEN
+═══════════════════════════════════════ */
+.cheat-section {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.cheat-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cheat-title-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cheat-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.cheat-row:last-child { border-bottom: none; padding-bottom: 0; }
+.cheat-key {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  min-width: 90px;
+  padding-top: 1px;
+}
+.cheat-val { color: var(--muted); word-break: break-word; }
+.cheat-val strong { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ═══ HEADER ═══ -->
+  <div id="header">
+    <div class="header-top">
+      <button class="back-btn hidden" id="backBtn" onclick="goBack()">←</button>
+      <div class="header-title">
+        <h1 id="headerTitle">ЕГЭ 2026 · Русский язык</h1>
+        <p id="headerSub">Задания 10 и 11</p>
+      </div>
+      <div style="width:32px;flex-shrink:0"></div>
+    </div>
+    <div class="task-switcher" id="taskSwitcher">
+      <button class="task-btn active" id="btn11" onclick="switchTask(11)">§11 Суффиксы</button>
+      <button class="task-btn" id="btn10" onclick="switchTask(10)">§10 Приставки</button>
+    </div>
+  </div>
+
+  <!-- ═══ SCROLL AREA ═══ -->
+  <div id="scroll">
+
+    <!-- ─── HOME ─── -->
+    <div class="view active" id="view-home">
+      <div class="home-hero">
+        <h1>Теория<br><span>ЕГЭ 2026</span></h1>
+        <p>Задания 10 и 11 по русскому языку.<br>Теория, примеры, тесты, шпаргалки.</p>
+      </div>
+      <div class="home-grid">
+        <button class="home-card t11" onclick="openView('view-11')">
+          <span class="hc-icon">📚</span>
+          <div class="hc-title">Суффиксы</div>
+          <div class="hc-desc">5 разделов теории</div>
+          <span class="hc-badge y">Задание 11</span>
+        </button>
+        <button class="home-card t10" onclick="openView('view-10')">
+          <span class="hc-icon">🔤</span>
+          <div class="hc-title">Приставки</div>
+          <div class="hc-desc">5 разделов теории</div>
+          <span class="hc-badge p">Задание 10</span>
+        </button>
+        <button class="home-card test" onclick="openView('view-test')">
+          <span class="hc-icon">✏️</span>
+          <div class="hc-title">Тест</div>
+          <div class="hc-desc">15 вопросов по обоим заданиям</div>
+          <span class="hc-badge r">15 вопросов</span>
+        </button>
+        <button class="home-card cheat" onclick="openView('view-cheat')">
+          <span class="hc-icon">📋</span>
+          <div class="hc-title">Шпаргалка</div>
+          <div class="hc-desc">Всё кратко в одном месте</div>
+          <span class="hc-badge g">Быстрый доступ</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── ЗАДАНИЕ 11 — СУФФИКСЫ ─── -->
+    <div class="view" id="view-11">
+      <div class="tabs" id="tabs11">
+        <button class="tab y active" data-sec="11-nouns">Существительные</button>
+        <button class="tab y" data-sec="11-adj">Прилагательные</button>
+        <button class="tab y" data-sec="11-verbs">Глаголы</button>
+        <button class="tab y" data-sec="11-adv">Наречия</button>
+        <button class="tab y" data-sec="11-oe">О/Ё после шипящих</button>
+      </div>
+
+      <!-- Существительные -->
+      <div class="subsection active" id="sub-11-nouns">
+        <p class="sec-label y">§1 — Суффиксы существительных</p>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ИЦ- / -ЕЦ-</span><span class="rule-lbl">Мужской, женский и средний род</span></div>
+          <div class="conds three">
+            <div class="cond"><span class="cond-ico">♂</span><div class="cond-body"><div class="cond-rule">Мужской → <strong>-ЕЦ-</strong></div><div class="cond-exs"><span class="ex">гвард<em>еец</em></span><span class="ex">кор<em>еец</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">♀</span><div class="cond-body"><div class="cond-rule">Женский → <strong>-ИЦ-</strong></div><div class="cond-exs"><span class="ex">метел<em>ица</em></span><span class="ex">красав<em>ица</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">◐</span><div class="cond-body"><div class="cond-rule">Средний, удар. <strong>до</strong> суффикса → <strong>-ИЦ-</strong></div><div class="cond-exs"><span class="ex">кресл<em>ице</em></span></div></div></div>
+          </div>
+          <div class="conds" style="margin-top:8px">
+            <div class="cond"><span class="cond-ico">◐</span><div class="cond-body"><div class="cond-rule">Средний, удар. <strong>после</strong> суффикса → <strong>-ЕЦ-</strong></div><div class="cond-exs"><span class="ex">пальт<em>ецо́</em></span><span class="ex">письм<em>ецо́</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ИНК- / -ЕНК-</span><span class="rule-lbl">Уменьшительно-ласкательные</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Основа на <strong>-ИНА</strong> → <strong>-ИНК-</strong></div><div class="cond-exs"><span class="ex">солом<em>ина</em> → солом<em>инка</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Ж.р. на <strong>-НЯ</strong> с беглой Е → <strong>-ЕНК-</strong></div><div class="cond-exs"><span class="ex">вишн<em>я</em> → вишен<em>ка</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Ж.р. прочие → <strong>-ЕНК-</strong></div><div class="cond-exs"><span class="ex">нищ<em>енка</em></span><span class="ex">монаш<em>енка</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Все остальные → <strong>-ИНК-</strong></div><div class="cond-exs"><span class="ex">бисер<em>инка</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ИЧК- / -ЕЧК-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Ж.р. от слова на <strong>-ИЦА</strong> → <strong>-ИЧК-</strong></div><div class="cond-exs"><span class="ex">умн<em>ица</em> → умн<em>ичка</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Все остальные → <strong>-ЕЧК-</strong></div><div class="cond-exs"><span class="ex">врем<em>я</em> → врем<em>ечко</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ИК- / -ЕК-</span><span class="rule-lbl">Проверяй родительным падежом</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">В р.п. «И» <strong>сохраняется</strong> → <strong>-ИК-</strong></div><div class="cond-exs"><span class="ex">ключ<em>ик</em> → ключ<em>ика</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">В р.п. гласная <strong>выпадает</strong> → <strong>-ЕК-</strong></div><div class="cond-exs"><span class="ex">дружоч<em>ек</em> → дружочк<em>а</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ОНЬК- / -ЕНЬК-</span><span class="rule-lbl">-АНЬК- и -ИНЬК- не существуют!</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">👂</span><div class="cond-body"><div class="cond-rule">Выбирай по звучанию</div><div class="cond-exs"><span class="ex">берёз<em>онька</em></span></div></div></div>
+          </div>
+          <div class="exc">⚠️ Исключения: <strong>заинька, паинька, баиньки</strong></div>
+        </div>
+
+        <div class="rule-card y">
+          <div class="rule-head"><span class="badge y">-ЧИК- / -ЩИК-</span><span class="rule-lbl">Значение деятеля</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После <strong>Д Т З С Ж</strong> → <strong>-ЧИК-</strong></div><div class="cond-exs"><span class="ex">лётчик</span><span class="ex">разносчик</span><span class="ex">перебежчик</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После остальных → <strong>-ЩИК-</strong></div><div class="cond-exs"><span class="ex">барабанщик</span><span class="ex">каменщик</span></div></div></div>
+          </div>
+          <div class="note">💡 «<strong>Де Тоже За Свой Жест</strong>» — Д Т З С Ж → -ЧИК-</div>
+          <div class="exc">⚠️ Ь перед -ЩИК- только после <strong>Л</strong>: кровел<em>ь</em>щик</div>
+        </div>
+      </div>
+
+      <!-- Прилагательные -->
+      <div class="subsection" id="sub-11-adj">
+        <p class="sec-label p">§2 — Суффиксы прилагательных</p>
+
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">-ЧИВ- / -ЛИВ- / -ИВ- / -ЕВ-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule"><strong>-ЧИВ- / -ЛИВ-</strong> — всегда «И»</div><div class="cond-exs"><span class="ex">зан<em>осчивый</em></span><span class="ex">удач<em>ливый</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule"><strong>-ИВ-</strong> под удар., <strong>-ЕВ-</strong> без удар.</div><div class="cond-exs"><span class="ex">крас<em>и́вый</em></span><span class="ex">замш<em>евый</em></span></div></div></div>
+          </div>
+          <div class="exc">⚠️ <strong>милостивый, юродивый</strong></div>
+        </div>
+
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">-ЕНЬК- / -ОНЬК-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После <strong>твёрдых</strong> → <strong>-ОНЬК-</strong></div><div class="cond-exs"><span class="ex">лег<em>онький</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После <strong>мягких</strong> → <strong>-ЕНЬК-</strong></div><div class="cond-exs"><span class="ex">мал<em>енький</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">-ИСТ- / -ЧАТ-</span><span class="rule-lbl">Неизменяемые — всегда «И»/«А»</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">-<strong>ИСТ-</strong> всегда «И»</div><div class="cond-exs"><span class="ex">надрыв<em>истый</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">-<strong>ЧАТ-</strong> всегда «А»</div><div class="cond-exs"><span class="ex">зуб<em>чатый</em></span><span class="ex">но: дощ<em>атый</em></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">-К- / -СК-</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Основа на <strong>К Ц Ч</strong> или кр. форма → <strong>-К-</strong></div><div class="cond-exs"><span class="ex">рыбацкий</span><span class="ex">ткацкий</span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">Остальные → <strong>-СК-</strong></div><div class="cond-exs"><span class="ex">французский</span><span class="ex">матросский</span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Глаголы -->
+      <div class="subsection" id="sub-11-verbs">
+        <p class="sec-label r">§3 — Суффиксы глаголов</p>
+        <div class="rule-card r">
+          <div class="rule-head"><span class="badge r">-ОВА- / -ЕВА- / -ЫВА- / -ИВА-</span></div>
+          <div class="algo">
+            <div class="algo-title">Алгоритм</div>
+            <div class="algo-steps">
+              <div class="algo-step"><div class="step-n r">1</div><div class="step-txt">Поставь в <strong>1 л. ед.ч.</strong> того же вида</div></div>
+              <div class="algo-step"><div class="step-n r">2</div><div class="step-txt">Окончание <strong>-УЮ / -ЮЮ</strong> → пиши <strong>-ОВА- / -ЕВА-</strong></div></div>
+              <div class="algo-step"><div class="step-n r">3</div><div class="step-txt">Суффикс <strong>сохраняется</strong> → пиши <strong>-ЫВА- / -ИВА-</strong></div></div>
+            </div>
+          </div>
+          <div class="conds" style="margin-top:10px">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">ноч_вать → (я) ноч<em>ую</em> → ноч<em>евать</em></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">скруч_вать → (я) скруч<em>иваю</em> → скруч<em>ивать</em></div></div></div>
+          </div>
+          <div class="note">💡 Ставь в форму <strong>того же вида</strong>! скручивать (что делать?) → скручиваю (что делаю?)</div>
+        </div>
+      </div>
+
+      <!-- Наречия -->
+      <div class="subsection" id="sub-11-adv">
+        <p class="sec-label g">§4 — Суффиксы наречий</p>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Суффиксальный способ</span><span class="rule-lbl">Только суффикс</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После <strong>твёрдых</strong> → <strong>-О-</strong></div><div class="cond-exs"><span class="ex">вкусн<em>о</em></span><span class="ex">легк<em>о</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule">После <strong>шипящих</strong>: удар.→<strong>-О-</strong>, без→<strong>-Е-</strong></div><div class="cond-exs"><span class="ex">горяч<em>о́</em></span><span class="ex">тягуч<em>е</em></span></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card g">
+          <div class="rule-head"><span class="badge g">Приставочно-суффиксальный</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule"><strong>ИЗ- ДО- С-</strong> → суффикс <strong>-А-</strong></div><div class="cond-exs"><span class="ex">издавн<em>а</em></span><span class="ex">досыт<em>а</em></span><span class="ex">слегк<em>а</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule"><strong>ЗА- НА- В-</strong> → суффикс <strong>-О-</strong></div><div class="cond-exs"><span class="ex">задолг<em>о</em></span><span class="ex">наскор<em>о</em></span><span class="ex">вправ<em>о</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body"><div class="cond-rule"><strong>В- НА-</strong> → суффикс <strong>-Е-</strong></div><div class="cond-exs"><span class="ex">вкратц<em>е</em></span><span class="ex">налегк<em>е</em></span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- О/Ё -->
+      <div class="subsection" id="sub-11-oe">
+        <p class="sec-label o">§5 — О и Ё после шипящих и Ц</p>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">О / Ё в суффиксе</span><span class="rule-lbl">туш_нка, девч_нка</span></div>
+          <div class="algo">
+            <div class="algo-title">Алгоритм</div>
+            <div class="algo-steps">
+              <div class="algo-step"><div class="step-n o">1</div><div class="step-txt">Слово связано с <strong>глаголом</strong>?</div></div>
+              <div class="algo-step"><div class="step-n o">2</div><div class="step-txt">Да → пиши <strong>Е/Ё</strong>: туш<em>ёнка</em>, сгущ<em>ёнка</em>, печ<em>ёный</em></div></div>
+              <div class="algo-step"><div class="step-n o">3</div><div class="step-txt">Нет → под ударением → <strong>О</strong>: девч<em>о́нка</em>, руч<em>о́нка</em>, холщ<em>о́вый</em></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ЗАДАНИЕ 10 — ПРИСТАВКИ ─── -->
+    <div class="view" id="view-10">
+      <div class="tabs" id="tabs10">
+        <button class="tab p active" data-sec="10-pz">ПРЕ- / ПРИ-</button>
+        <button class="tab p" data-sec="10-zs">З- / С-</button>
+        <button class="tab p" data-sec="10-s">Приставка С-</button>
+        <button class="tab p" data-sec="10-nezi">НЕ- / НИ-</button>
+        <button class="tab p" data-sec="10-other">Неизменяемые</button>
+      </div>
+
+      <!-- ПРЕ-/ПРИ- -->
+      <div class="subsection active" id="sub-10-pz">
+        <p class="sec-label p">ПРЕ- и ПРИ-</p>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">ПРИ-</span><span class="rule-lbl">Значения приставки</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">→</span><div class="cond-body"><div class="cond-rule">Приближение</div><div class="cond-exs"><span class="ex">при<em>ехать</em></span><span class="ex">при<em>лететь</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">+</span><div class="cond-body"><div class="cond-rule">Присоединение</div><div class="cond-exs"><span class="ex">при<em>клеить</em></span><span class="ex">при<em>шить</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">〜</span><div class="cond-body"><div class="cond-rule">Неполнота действия</div><div class="cond-exs"><span class="ex">при<em>открыть</em></span><span class="ex">при<em>лечь</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">📍</span><div class="cond-body"><div class="cond-rule">Нахождение рядом</div><div class="cond-exs"><span class="ex">при<em>школьный</em></span><span class="ex">при<em>морский</em></span></div></div></div>
+          </div>
+        </div>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">ПРЕ-</span><span class="rule-lbl">Значения приставки</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">⬆</span><div class="cond-body"><div class="cond-rule">Высокая степень (= очень)</div><div class="cond-exs"><span class="ex">пре<em>красный</em></span><span class="ex">пре<em>мудрый</em></span></div></div></div>
+            <div class="cond"><span class="cond-ico">↔</span><div class="cond-body"><div class="cond-rule">= ПЕРЕ-</div><div class="cond-exs"><span class="ex">пре<em>рвать</em></span><span class="ex">пре<em>одолеть</em></span></div></div></div>
+          </div>
+          <div class="note">💡 Словарные: <strong>привет, причина, природа</strong> / <strong>президент, престиж, претендент</strong></div>
+        </div>
+      </div>
+
+      <!-- З-/С- -->
+      <div class="subsection" id="sub-10-zs">
+        <p class="sec-label p">З- / С- на конце приставки</p>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">без-/бес-, раз-/рас-, из-/ис-…</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">🔊</span><div class="cond-body"><div class="cond-rule">Перед <strong>звонкой</strong> согласной → <strong>З</strong></div><div class="cond-exs"><span class="ex">раз<em>б</em>ить</span><span class="ex">без<em>д</em>омный</span><span class="ex">из<em>л</em>ить</span></div></div></div>
+            <div class="cond"><span class="cond-ico">🔇</span><div class="cond-body"><div class="cond-rule">Перед <strong>глухой</strong> согласной → <strong>С</strong></div><div class="cond-exs"><span class="ex">рас<em>к</em>рыть</span><span class="ex">бес<em>п</em>латный</span><span class="ex">ис<em>х</em>одить</span></div></div></div>
+          </div>
+          <div class="note">💡 Звонкие: Б В Г Д Ж З Л М Н Р · Глухие: К П С Т Ф Х Ц Ч Ш Щ</div>
+        </div>
+      </div>
+
+      <!-- Приставка С- -->
+      <div class="subsection" id="sub-10-s">
+        <p class="sec-label p">Приставка С- — неизменяемая</p>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">С-</span><span class="rule-lbl">Всегда С, никогда З!</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✅</span><div class="cond-body"><div class="cond-rule"><strong>с</strong>делать, <strong>с</strong>бить, <strong>с</strong>жечь, <strong>с</strong>гореть — даже перед звонкими!</div></div></div>
+            <div class="cond"><span class="cond-ico">❌</span><div class="cond-body"><div class="cond-rule"><em>з</em>делать, <em>з</em>бить — таких слов нет!</div></div></div>
+          </div>
+          <div class="exc">⚠️ В русском языке <strong>НЕТ приставки З-</strong>!</div>
+        </div>
+      </div>
+
+      <!-- НЕ-/НИ- -->
+      <div class="subsection" id="sub-10-nezi">
+        <p class="sec-label p">НЕ- / НИ- в местоимениях и наречиях</p>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">НЕ- / НИ-</span><span class="rule-lbl">Зависит от ударения</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">´</span><div class="cond-body"><div class="cond-rule">Под <strong>ударением</strong> → <strong>НЕ-</strong></div><div class="cond-exs"><span class="ex">н<em>е́</em>кто</span><span class="ex">н<em>е́</em>где</span><span class="ex">н<em>е́</em>когда</span></div></div></div>
+            <div class="cond"><span class="cond-ico">‌</span><div class="cond-body"><div class="cond-rule">Без <strong>ударения</strong> → <strong>НИ-</strong></div><div class="cond-exs"><span class="ex">никт<em>о́</em></span><span class="ex">нигд<em>е́</em></span><span class="ex">никогд<em>а́</em></span></div></div></div>
+          </div>
+          <div class="note">💡 Проверка: поставь ударение — куда падает, ту приставку и пиши</div>
+        </div>
+      </div>
+
+      <!-- Неизменяемые -->
+      <div class="subsection" id="sub-10-other">
+        <p class="sec-label p">Неизменяемые приставки</p>
+        <div class="rule-card p">
+          <div class="rule-head"><span class="badge p">Просто запомни</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📌</span><div class="cond-body"><div class="cond-rule"><strong>В, ВЫ, ДО, ЗА, НА, НАД, О, ОБ, ОТ, ПО, ПОД, ПРО, СУ, У, ПЕРЕ</strong></div><div class="cond-exs"><span class="ex">войти</span><span class="ex">выйти</span><span class="ex">закрыть</span><span class="ex">написать</span><span class="ex">отдать</span><span class="ex">прочитать</span></div></div></div>
+          </div>
+          <div class="note">💡 ОТ- всегда ОТ- (не ОД-): от<em>дать</em>, от<em>бить</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ТЕСТ ─── -->
+    <div class="view" id="view-test">
+      <div class="test-wrap">
+        <div id="test-body">
+          <div class="test-progress-bar"><div class="test-progress-fill" id="testFill" style="width:0%"></div></div>
+          <div class="test-counter" id="testCounter">ВОПРОС 1 ИЗ 15</div>
+          <div class="test-q" id="testQ"></div>
+          <div class="test-options" id="testOpts"></div>
+          <div class="test-explanation" id="testExp">
+            <div class="exp-title">Объяснение</div>
+            <div id="testExpText"></div>
+          </div>
+          <button class="test-next-btn" id="testNext" onclick="nextQuestion()">Следующий вопрос →</button>
+        </div>
+        <div class="test-result" id="test-result">
+          <div class="result-score" id="resultScore"></div>
+          <div class="result-label">правильных ответов из 15</div>
+          <div class="result-msg" id="resultMsg"></div>
+          <button class="result-restart" onclick="startTest()">🔄 Пройти ещё раз</button>
+          <button class="result-restart" style="margin-top:8px" onclick="goBack()">← Вернуться в меню</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА ─── -->
+    <div class="view" id="view-cheat">
+      <p class="sec-label y" style="margin-bottom:16px">Задание 11 — Суффиксы</p>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--y)"></span>Существительные</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИЦ- / -ЕЦ-</span><span class="cheat-val">М.р. → <strong>-ЕЦ-</strong>, Ж.р. → <strong>-ИЦ-</strong>, Ср.р. удар. до → <strong>-ИЦ-</strong>, после → <strong>-ЕЦ-</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИНК- / -ЕНК-</span><span class="cheat-val">Основа на -ИНА → <strong>-ИНК-</strong>, Ж.р. -НЯ с беглой Е → <strong>-ЕНК-</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИЧК- / -ЕЧК-</span><span class="cheat-val">От -ИЦА → <strong>-ИЧК-</strong>, остальные → <strong>-ЕЧК-</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ИК- / -ЕК-</span><span class="cheat-val">И сохр. в р.п. → <strong>-ИК-</strong>, выпадает → <strong>-ЕК-</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--y)">-ЧИК- / -ЩИК-</span><span class="cheat-val">Д Т З С Ж → <strong>-ЧИК-</strong>, остальные → <strong>-ЩИК-</strong></span></div>
+      </div>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>Прилагательные</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-ЧИВ- / -ЛИВ-</span><span class="cheat-val">Всегда «И»: заносчивый, удачливый</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-ИВ- / -ЕВ-</span><span class="cheat-val">Под удар. → <strong>-ИВ-</strong>, без → <strong>-ЕВ-</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-ИСТ- / -ЧАТ-</span><span class="cheat-val">Неизменяемые: породистый, зубчатый</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">-К- / -СК-</span><span class="cheat-val">Осн. К Ц Ч / кр.ф. → <strong>-К-</strong>, иначе → <strong>-СК-</strong></span></div>
+      </div>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--r)"></span>Глаголы</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--r)">-ОВА- / -ЕВА-</span><span class="cheat-val">1 л. ед.ч. → <strong>-ую/-юю</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--r)">-ЫВА- / -ИВА-</span><span class="cheat-val">1 л. ед.ч. суффикс <strong>сохраняется</strong></span></div>
+      </div>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--g)"></span>Наречия</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">ИЗ- ДО- С-</span><span class="cheat-val">Суффикс <strong>-А-</strong>: издавна, досыта</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">ЗА- НА- В-</span><span class="cheat-val">Суффикс <strong>-О-</strong>: задолго, вправо</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--g)">В- НА- + -Е-</span><span class="cheat-val">вкратце, налегке</span></div>
+      </div>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>О/Ё после шипящих</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">От глагола</span><span class="cheat-val">→ <strong>Ё</strong>: тушёнка, сгущёнка</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">Не от глагола</span><span class="cheat-val">Под удар. → <strong>О</strong>: девчонка, ручонка</span></div>
+      </div>
+
+      <p class="sec-label p" style="margin: 20px 0 16px">Задание 10 — Приставки</p>
+
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--p)"></span>Все правила</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРИ-</span><span class="cheat-val">Приближение, присоединение, неполнота, рядом</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">ПРЕ-</span><span class="cheat-val">= очень / = ПЕРЕ-</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">З- / С-</span><span class="cheat-val">Звонкая → З, глухая → С (без-/бес-, раз-/рас-…)</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">Приставка С-</span><span class="cheat-val">Всегда <strong>С-</strong>! Приставки З- не существует</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--p)">НЕ- / НИ-</span><span class="cheat-val">Под удар. → <strong>НЕ-</strong>, без удар. → <strong>НИ-</strong></span></div>
+      </div>
+    </div>
+
+  </div><!-- /scroll -->
+</div><!-- /app -->
+
+<script>
+// ══════════════════════════════════════
+// TG MINI APP INIT
+// ══════════════════════════════════════
+const tg = window.Telegram?.WebApp;
+if (tg) {
+  tg.ready();
+  tg.expand();
+  tg.setHeaderColor('#0e0e14');
+  tg.setBackgroundColor('#0e0e14');
+}
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+let history = [];
+let currentTask = 11;
+
+function openView(viewId) {
+  const current = document.querySelector('.view.active');
+  if (current) history.push(current.id);
+  showView(viewId);
+  document.getElementById('scroll').scrollTop = 0;
+  updateHeader(viewId);
+  if (viewId === 'view-test') startTest();
+}
+
+function showView(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(viewId)?.classList.add('active');
+}
+
+function goBack() {
+  if (history.length === 0) return;
+  const prev = history.pop();
+  showView(prev);
+  document.getElementById('scroll').scrollTop = 0;
+  updateHeader(prev);
+}
+
+function updateHeader(viewId) {
+  const backBtn = document.getElementById('backBtn');
+  const title = document.getElementById('headerTitle');
+  const sub = document.getElementById('headerSub');
+  const switcher = document.getElementById('taskSwitcher');
+
+  const isHome = viewId === 'view-home';
+  backBtn.classList.toggle('hidden', isHome);
+  switcher.style.display = isHome ? 'flex' : 'none';
+
+  const titles = {
+    'view-home':  ['ЕГЭ 2026 · Русский язык', 'Задания 10 и 11'],
+    'view-11':    ['Задание 11', 'Суффиксы'],
+    'view-10':    ['Задание 10', 'Приставки'],
+    'view-test':  ['Тест', 'Задания 10 и 11'],
+    'view-cheat': ['Шпаргалка', 'Быстрый доступ'],
+  };
+  const [t, s] = titles[viewId] || ['ЕГЭ 2026', ''];
+  title.textContent = t;
+  sub.textContent = s;
+
+  if (tg?.BackButton) {
+    if (!isHome) { tg.BackButton.show(); tg.BackButton.onClick(goBack); }
+    else tg.BackButton.hide();
+  }
+}
+
+function switchTask(n) {
+  currentTask = n;
+  document.getElementById('btn11').classList.toggle('active', n === 11);
+  document.getElementById('btn10').classList.toggle('active', n === 10);
+  history = [];
+  openView(n === 11 ? 'view-11' : 'view-10');
+}
+
+// ══════════════════════════════════════
+// TABS (theory sections)
+// ══════════════════════════════════════
+document.querySelectorAll('.tabs').forEach(tabsEl => {
+  tabsEl.addEventListener('click', e => {
+    const tab = e.target.closest('.tab');
+    if (!tab) return;
+    const secId = tab.dataset.sec;
+    tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const view = tabsEl.closest('.view');
+    view.querySelectorAll('.subsection').forEach(s => s.classList.remove('active'));
+    view.querySelector('#sub-' + secId)?.classList.add('active');
+    document.getElementById('scroll').scrollTop = 0;
+  });
+});
+
+// ══════════════════════════════════════
+// TEST DATA
+// ══════════════════════════════════════
+const TESTS = [
+  { q: 'Задание 11. Какой суффикс в слове «шалашик»?', opts: ['-ЕК-', '-ИК-'], correct: 1, exp: 'Шалашик → шалашика (И сохраняется в р.п.) → суффикс -ИК-.' },
+  { q: 'Задание 11. Как пишется: «ноч_вать»?', opts: ['ночовать', 'ночевать'], correct: 1, exp: '(Я) ночую — окончание -УЮ → пишем -ЕВА- → ночевать.' },
+  { q: 'Задание 11. Суффикс в слове «умничка» (от умница)?', opts: ['-ЕЧК-', '-ИЧК-'], correct: 1, exp: 'Образовано от слова на -ИЦА (умница) → суффикс -ИЧК-.' },
+  { q: 'Задание 11. Как пишется: «барабан_ик»?', opts: ['барабанчик', 'барабанщик'], correct: 1, exp: 'Буква Н не входит в Д Т З С Ж → пишем -ЩИК-: барабанщик.' },
+  { q: 'Задание 11. Суффикс наречия «издавна»?', opts: ['-О-', '-А-'], correct: 1, exp: 'Приставка ИЗ- → суффикс -А-: издавна.' },
+  { q: 'Задание 11. Как пишется: «тушён_а»?', opts: ['тушонка', 'тушёнка'], correct: 1, exp: 'От глагола «тушить» → пишем Ё: тушёнка.' },
+  { q: 'Задание 11. -ЧИК- или -ЩИК-: «лёт_ик»?', opts: ['лётщик', 'лётчик'], correct: 1, exp: 'Буква Т входит в Д Т З С Ж → пишем -ЧИК-: лётчик.' },
+  { q: 'Задание 10. Как пишется: «пре/при_открыть окно»?', opts: ['преоткрыть', 'приоткрыть'], correct: 1, exp: 'ПРИ- = неполнота действия (слегка открыть) → приоткрыть.' },
+  { q: 'Задание 10. Как пишется: «рас/раз_крыть»?', opts: ['разкрыть', 'раскрыть'], correct: 1, exp: 'К — глухая согласная → пишем С: раскрыть.' },
+  { q: 'Задание 10. Как пишется: «с/з_бить»?', opts: ['сбить', 'збить'], correct: 0, exp: 'Приставка С- неизменяемая! В русском языке нет приставки З-.' },
+  { q: 'Задание 10. НЕ- или НИ-: «н_где не был»?', opts: ['нЕгде', 'нИгде'], correct: 1, exp: 'Нигде — ударение на последний слог, не на приставку → НИ-: нигде.' },
+  { q: 'Задание 10. Как пишется: «пре/при_красный»?', opts: ['прикрасный', 'прекрасный'], correct: 1, exp: 'ПРЕ- = очень (очень красивый) → прекрасный.' },
+  { q: 'Задание 10. Как пишется: «без/бес_шумный»?', opts: ['безшумный', 'бесшумный'], correct: 1, exp: 'Ш — глухая согласная → пишем С: бесшумный.' },
+  { q: 'Задание 10. Как пишется: «пре/при_школьный участок»?', opts: ['прешкольный', 'пришкольный'], correct: 1, exp: 'ПРИ- = нахождение рядом (рядом со школой) → пришкольный.' },
+  { q: 'Задание 10. НЕ- или НИ-: «н_кто постучал»?', opts: ['нЕкто', 'нИкто'], correct: 0, exp: 'Нéкто — ударение падает на приставку НЕ → нéкто.' },
+];
+
+// ══════════════════════════════════════
+// TEST LOGIC
+// ══════════════════════════════════════
+let testOrder = [], testIdx = 0, score = 0, answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startTest() {
+  testOrder = shuffle([...Array(TESTS.length).keys()]);
+  testIdx = 0; score = 0;
+  document.getElementById('test-result').classList.remove('show');
+  document.getElementById('test-body').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = TESTS[testOrder[testIdx]];
+  answered = false;
+
+  document.getElementById('testFill').style.width = (testIdx / TESTS.length * 100) + '%';
+  document.getElementById('testCounter').textContent = `ВОПРОС ${testIdx + 1} ИЗ ${TESTS.length}`;
+  document.getElementById('testQ').innerHTML = q.q.replace(/(пре\/при|рас\/раз|с\/з|НЕ- или НИ-|без\/бес)/gi, s => `<span class="highlight">${s}</span>`);
+
+  const optsEl = document.getElementById('testOpts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'test-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuestion(i);
+    optsEl.appendChild(btn);
+  });
+
+  document.getElementById('testExp').classList.remove('show');
+  document.getElementById('testNext').classList.remove('show');
+  document.getElementById('testNext').textContent = testIdx < TESTS.length - 1 ? 'Следующий вопрос →' : 'Посмотреть результат →';
+}
+
+function answerQuestion(chosen) {
+  if (answered) return;
+  answered = true;
+  const q = TESTS[testOrder[testIdx]];
+  const opts = document.querySelectorAll('.test-opt');
+
+  opts.forEach((btn, i) => {
+    btn.classList.add('disabled');
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  if (chosen === q.correct) score++;
+
+  document.getElementById('testExpText').textContent = q.exp;
+  document.getElementById('testExp').classList.add('show');
+  document.getElementById('testNext').classList.add('show');
+
+  if (tg?.HapticFeedback) {
+    tg.HapticFeedback.notificationOccurred(chosen === q.correct ? 'success' : 'error');
+  }
+}
+
+function nextQuestion() {
+  testIdx++;
+  if (testIdx >= TESTS.length) {
+    showResult();
+  } else {
+    renderQuestion();
+    document.getElementById('scroll').scrollTop = 0;
+  }
+}
+
+function showResult() {
+  document.getElementById('test-body').style.display = 'none';
+  const resultEl = document.getElementById('test-result');
+  resultEl.classList.add('show');
+  document.getElementById('resultScore').textContent = score;
+
+  let msg;
+  const pct = score / TESTS.length;
+  if (pct === 1)        msg = '🏆 Идеально! Ты готов к ЕГЭ!';
+  else if (pct >= 0.8)  msg = '🎉 Отличный результат!';
+  else if (pct >= 0.6)  msg = '📚 Неплохо, но стоит повторить';
+  else                  msg = '💪 Повтори теорию и попробуй снова';
+  document.getElementById('resultMsg').textContent = msg;
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+updateHeader('view-home');
+</script>
+</body>
+</html>
