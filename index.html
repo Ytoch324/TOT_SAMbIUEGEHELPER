@@ -22,6 +22,9 @@
   --r:  #ff6c7b;
   --g:  #5fffb0;
   --o:  #ff9f5a;
+  --b:  #5fc8ff;
+  --m:  #ff64b4;
+  --l:  #a0dc64;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -150,6 +153,9 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .tab.r.active  { background: var(--r); color: #fff; }
 .tab.g.active  { background: var(--g); }
 .tab.o.active  { background: var(--o); }
+.tab.b.active  { background: var(--b); color: #0e0e14; }
+.tab.m.active  { background: var(--m); color: #0e0e14; }
+.tab.l.active  { background: var(--l); color: #0e0e14; }
 
 /* ─── SECTION LABEL ─── */
 .sec-label {
@@ -166,6 +172,9 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .sec-label.r { color: var(--r); }
 .sec-label.g { color: var(--g); }
 .sec-label.o { color: var(--o); }
+.sec-label.b { color: var(--b); }
+.sec-label.m { color: var(--m); }
+.sec-label.l { color: var(--l); }
 
 .subsection { display: none; }
 .subsection.active { display: block; }
@@ -192,6 +201,9 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .rule-card.r::before { background: var(--r); }
 .rule-card.g::before { background: var(--g); }
 .rule-card.o::before { background: var(--o); }
+.rule-card.b::before { background: var(--b); }
+.rule-card.m::before { background: var(--m); }
+.rule-card.l::before { background: var(--l); }
 
 .rule-head {
   display: flex;
@@ -214,6 +226,9 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .badge.r { background: rgba(255,108,123,.15); color: var(--r); border: 1px solid rgba(255,108,123,.3); }
 .badge.g { background: rgba(95,255,176,.15); color: var(--g); border: 1px solid rgba(95,255,176,.3); }
 .badge.o { background: rgba(255,159,90,.15); color: var(--o); border: 1px solid rgba(255,159,90,.3); }
+.badge.b { background: rgba(95,200,255,.15); color: var(--b); border: 1px solid rgba(95,200,255,.3); }
+.badge.m { background: rgba(255,100,180,.15); color: var(--m); border: 1px solid rgba(255,100,180,.3); }
+.badge.l { background: rgba(160,220,100,.15); color: var(--l); border: 1px solid rgba(160,220,100,.3); }
 
 .rule-lbl {
   font-size: 0.74rem;
@@ -614,7 +629,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
       <button class="back-btn hidden" id="backBtn" onclick="goBack()">←</button>
       <div class="header-title">
         <h1 id="headerTitle">ЕГЭ 2026 · Русский язык</h1>
-        <p id="headerSub">Задания 9, 10 и 11</p>
+        <p id="headerSub">Подготовка к экзамену</p>
       </div>
       <div style="width:32px;flex-shrink:0"></div>
     </div>
@@ -628,7 +643,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
     <div class="view active" id="view-home">
       <div class="home-hero">
         <h1>Русский<br><span>ЕГЭ 2026</span></h1>
-        <p>Задания 9, 10 и 11 · теория, шпаргалки, тесты</p>
+        <p>Теория, шпаргалки и тесты</p>
       </div>
 
       <!-- 4 большие кнопки -->
@@ -639,7 +654,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
             <span style="font-size:1.6rem">📝</span>
             <div>
               <div class="hc-title" style="font-size:0.8rem">Тестовые задания</div>
-              <div class="hc-desc">Теория по заданиям 9, 10, 11</div>
+              <div class="hc-desc">Задания 9–15 · теория и примеры</div>
             </div>
             <span style="margin-left:auto;color:var(--muted);font-size:1rem">›</span>
           </div>
@@ -715,6 +730,46 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
             <span style="margin-left:auto;color:var(--muted)">›</span>
           </div>
         </button>
+        <button class="home-card" style="border-color:rgba(255,159,90,.3);text-align:left" onclick="openView('view-12')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔥</span>
+            <div>
+              <div class="hc-title">Задание 12</div>
+              <div class="hc-desc">Спряжения глаголов, причастия, исключения</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(95,200,255,.3);text-align:left" onclick="openView('view-13')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✍️</span>
+            <div>
+              <div class="hc-title">Задание 13</div>
+              <div class="hc-desc">НЕ раздельно и слитно</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(255,100,180,.3);text-align:left" onclick="openView('view-14')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔗</span>
+            <div>
+              <div class="hc-title">Задание 14</div>
+              <div class="hc-desc">Слитно, раздельно, через дефис</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(160,220,100,.3);text-align:left" onclick="openView('view-15')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✏️</span>
+            <div>
+              <div class="hc-title">Задание 15</div>
+              <div class="hc-desc">Н и НН в разных частях речи</div>
+            </div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
       </div>
     </div>
 
@@ -743,6 +798,34 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
             <span style="margin-left:auto;color:var(--muted)">›</span>
           </div>
         </button>
+        <button class="home-card" style="border-color:rgba(255,159,90,.3);text-align:left" onclick="openView('view-cheat-12')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔥</span>
+            <div><div class="hc-title">Задание 12</div><div class="hc-desc">Спряжения — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(95,200,255,.3);text-align:left" onclick="openView('view-cheat-13')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✍️</span>
+            <div><div class="hc-title">Задание 13</div><div class="hc-desc">НЕ — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(255,100,180,.3);text-align:left" onclick="openView('view-cheat-14')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔗</span>
+            <div><div class="hc-title">Задание 14</div><div class="hc-desc">Слитно/раздельно/дефис — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(160,220,100,.3);text-align:left" onclick="openView('view-cheat-15')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✏️</span>
+            <div><div class="hc-title">Задание 15</div><div class="hc-desc">Н и НН — шпаргалка</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
       </div>
     </div>
 
@@ -768,6 +851,34 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
           <div style="display:flex;align-items:center;gap:12px">
             <span style="font-size:1.4rem">📚</span>
             <div><div class="hc-title">Тест — Задание 11</div><div class="hc-desc">Суффиксы · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(255,159,90,.3);text-align:left" onclick="startTestFor('12')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔥</span>
+            <div><div class="hc-title">Тест — Задание 12</div><div class="hc-desc">Спряжения · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(95,200,255,.3);text-align:left" onclick="startTestFor('13')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✍️</span>
+            <div><div class="hc-title">Тест — Задание 13</div><div class="hc-desc">НЕ · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(255,100,180,.3);text-align:left" onclick="startTestFor('14')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">🔗</span>
+            <div><div class="hc-title">Тест — Задание 14</div><div class="hc-desc">Слитно/раздельно/дефис · 10 вопросов</div></div>
+            <span style="margin-left:auto;color:var(--muted)">›</span>
+          </div>
+        </button>
+        <button class="home-card" style="border-color:rgba(160,220,100,.3);text-align:left" onclick="startTestFor('15')">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:1.4rem">✏️</span>
+            <div><div class="hc-title">Тест — Задание 15</div><div class="hc-desc">Н и НН · 10 вопросов</div></div>
             <span style="margin-left:auto;color:var(--muted)">›</span>
           </div>
         </button>
@@ -1048,6 +1159,687 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
       </div>
     </div>
 
+    <!-- ─── ЗАДАНИЕ 15 — Н И НН ─── -->
+    <div class="view" id="view-15">
+      <div class="tabs" id="tabs15">
+        <button class="tab l active" data-sec="15-noun">От существ.</button>
+        <button class="tab l" data-sec="15-verb">От глагола</button>
+        <button class="tab l" data-sec="15-short">Краткие формы</button>
+        <button class="tab l" data-sec="15-mem">Запомнить</button>
+      </div>
+
+      <!-- От существительных -->
+      <div class="subsection active" id="sub-15-noun">
+        <p class="sec-label l">§1 — Прилагательные от существительных</p>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Суффикс -Н-</span><span class="rule-lbl">Одна Н</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">Основа на одну согласную + суффикс <strong>-Н-</strong> = одна Н</div>
+              <div class="cond-exs"><span class="ex">зима → зимн<em>ий</em></span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">⚠️</span><div class="cond-body">
+              <div class="cond-rule">Основа уже оканчивается на <strong>-Н-</strong> + суффикс -Н- = две НН</div>
+              <div class="cond-exs"><span class="ex">осень → осе<em>нн</em>ий</span><span class="ex">луна → лу<em>нн</em>ый</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Суффиксы -АН- / -ЯН- / -ИН-</span><span class="rule-lbl">Одна Н</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">Перед пропуском видишь <strong>А / Я / И</strong> → всегда одна Н</div>
+              <div class="cond-exs">
+                <span class="ex">лебедь → лебед<em>ин</em>ый</span>
+                <span class="ex">серебро → серебр<em>ян</em>ый</span>
+                <span class="ex">кожа → кож<em>ан</em>ый</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ Исключения (НН!): <strong>стеклянный, оловянный, деревянный</strong></div>
+        </div>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Суффиксы -ЕНН- / -ОНН-</span><span class="rule-lbl">Две НН</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">💡</span><div class="cond-body">
+              <div class="cond-rule">Найди исходное слово → выдели корень → всё после корня = суффикс. Если суффикс начинается на <strong>Е</strong> или <strong>О</strong> → пиши НН</div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">авиация → корень АВИАЦИ- → суффикс начинается на О → <strong>авиациОНН</strong>ый</div>
+              <div class="cond-exs"><span class="ex">революция → революциОННый</span><span class="ex">торжество → торжестВЕННый</span></div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ Исключение: <strong>ветреный</strong> (но без<em>ветренн</em>ый)</div>
+        </div>
+
+        <div class="algo">
+          <div class="algo-title">Алгоритм для прилагательных от существительных</div>
+          <div class="algo-steps">
+            <div class="algo-step"><div class="step-n l">1</div><div class="step-txt">Найди исходное существительное</div></div>
+            <div class="algo-step"><div class="step-n l">2</div><div class="step-txt">Перед пропуском стоит А/Я/И? → одна Н (кроме стеклянный, оловянный, деревянный)</div></div>
+            <div class="algo-step"><div class="step-n l">3</div><div class="step-txt">Перед пропуском стоит Е/О? → две НН</div></div>
+            <div class="algo-step"><div class="step-n l">4</div><div class="step-txt">Основа на -Н- + суффикс -Н-? → две НН</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- От глагола -->
+      <div class="subsection" id="sub-15-verb">
+        <p class="sec-label l">§2 — Причастия и прилагательные от глаголов</p>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">4 критерия → НН</span><span class="rule-lbl">Хоть одно подходит — пишем НН</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">1</span><div class="cond-body">
+              <div class="cond-rule"><strong>Совершенный вид</strong> (что сделать?)</div>
+              <div class="cond-exs"><span class="ex">решить → решённый</span><span class="ex">купить → купленный</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">2</span><div class="cond-body">
+              <div class="cond-rule"><strong>Есть приставка</strong> (кроме НЕ-)</div>
+              <div class="cond-exs"><span class="ex">за<em>крашенный</em></span><span class="ex">про<em>читанный</em></span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">3</span><div class="cond-body">
+              <div class="cond-rule"><strong>Есть зависимое слово</strong></div>
+              <div class="cond-exs"><span class="ex">крашенный <em>мастером</em> забор</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">4</span><div class="cond-body">
+              <div class="cond-rule"><strong>Суффикс -ОВА- / -ЕВА- / -ИРОВА-</strong></div>
+              <div class="cond-exs"><span class="ex">маринованный</span><span class="ex">асфальтированный</span></div>
+            </div></div>
+          </div>
+          <div class="note">💡 Ни одного критерия нет → одна Н: крашеный забор, жареная курица</div>
+        </div>
+      </div>
+
+      <!-- Краткие формы -->
+      <div class="subsection" id="sub-15-short">
+        <p class="sec-label l">§3 — Краткие формы</p>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Краткое причастие</span><span class="rule-lbl">Всегда одна Н</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">Краткое причастие = есть действие, кто-то что-то сделал → <strong>одна Н</strong></div>
+              <div class="cond-exs"><span class="ex">семена рассеяН<em>ы</em> (их рассеяли)</span><span class="ex">работа выполнеН<em>а</em></span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Краткое прилагательное</span><span class="rule-lbl">Столько же Н, сколько в полной форме</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">Краткое прилагательное = признак, качество → <strong>столько же Н</strong>, сколько в полной форме</div>
+              <div class="cond-exs"><span class="ex">рассеяННая бабуля → бабуля рассеяНН<em>а</em></span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Как отличить причастие от прилагательного?</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">⚙️</span><div class="cond-body">
+              <div class="cond-rule"><strong>Причастие</strong> = есть глагол, кто-то совершил действие</div>
+              <div class="cond-exs"><span class="ex">рассеяНые семена = их рассеяли</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">🎨</span><div class="cond-body">
+              <div class="cond-rule"><strong>Прилагательное</strong> = признак, качество, никто ничего не делал</div>
+              <div class="cond-exs"><span class="ex">рассеяННая бабуля = невнимательная</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Запомнить -->
+      <div class="subsection" id="sub-15-mem">
+        <p class="sec-label l">§4 — Слова-исключения: запомнить!</p>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Всегда НН (несмотря на правило)</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule">невиданный, неслыханный, нежданный, негаданный, нечаянный, желанный, жеманный, священный, медленный, доморощенный, неожиданный, обещанный, окаянный, данный, чванный, чеканный</div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card l">
+          <div class="rule-head"><span class="badge l">Всегда одна Н (несмотря на правило)</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule"><strong>смышлёный</strong> — сообразительный</div>
+              <div class="cond-exs"><span class="ex">смышлёный мальчик</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule"><strong>названый брат</strong> — не кровный брат</div>
+              <div class="cond-exs"><span class="ex">≠ названный (тот, кого назвали)</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule"><strong>посажёный отец</strong> — роль на свадьбе</div>
+              <div class="cond-exs"><span class="ex">≠ посаженный (тот, кого посадили)</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ЗАДАНИЕ 14 — СЛИТНО/РАЗДЕЛЬНО/ДЕФИС ─── -->
+    <div class="view" id="view-14">
+      <div class="tabs" id="tabs14">
+        <button class="tab m active" data-sec="14-main">Главные правила</button>
+        <button class="tab m" data-sec="14-pred">Производные предлоги</button>
+        <button class="tab m" data-sec="14-conj">Союзы и частицы</button>
+        <button class="tab m" data-sec="14-mem">Запомнить</button>
+      </div>
+
+      <!-- Главные правила -->
+      <div class="subsection active" id="sub-14-main">
+        <p class="sec-label m">§1 — Два главных правила</p>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">Всегда раздельно — предлоги</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📌</span><div class="cond-body">
+              <div class="cond-rule">Эти сочетания пишутся <strong>раздельно всегда</strong> — исключи такие ряды первым делом</div>
+              <div class="cond-exs">
+                <span class="ex">в течение</span><span class="ex">в продолжение</span>
+                <span class="ex">в заключение</span><span class="ex">за счёт</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">Всегда через дефис</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">➖</span><div class="cond-body">
+              <div class="cond-rule">Слова с <strong>-то, -либо, -нибудь, кое-</strong> — всегда через дефис</div>
+              <div class="cond-exs">
+                <span class="ex">кое-кто</span><span class="ex">что-то</span>
+                <span class="ex">как-либо</span><span class="ex">кто-нибудь</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="note">💡 Этих двух правил обычно достаточно, чтобы убрать все лишние варианты в задании!</div>
+        </div>
+      </div>
+
+      <!-- Производные предлоги -->
+      <div class="subsection" id="sub-14-pred">
+        <p class="sec-label m">§2 — Производные предлоги: слитно или раздельно?</p>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ВСЛЕДСТВИЕ // В СЛЕДСТВИИ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно + Е</strong> = «из-за»</div>
+              <div class="cond-exs"><span class="ex">вследствие болезни</span><span class="ex">вследствие засухи</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно + И</strong> = следственные действия</div>
+              <div class="cond-exs"><span class="ex">в следствии вскрылись подробности</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">НАВСТРЕЧУ // НА ВСТРЕЧУ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «по направлению к»</div>
+              <div class="cond-exs"><span class="ex">навстречу ветру</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = предлог + сущ.; между ними можно вставить слово</div>
+              <div class="cond-exs"><span class="ex">на важную встречу</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ВВИДУ // В ВИДУ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «из-за / по причине»</div>
+              <div class="cond-exs"><span class="ex">ввиду опоздания</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = «на виду»</div>
+              <div class="cond-exs"><span class="ex">в виду всей Москвы</span></div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ <strong>иметь в виду</strong> — фразеологизм, всегда раздельно</div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">НАСЧЁТ // НА СЧЁТ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «об(о)»</div>
+              <div class="cond-exs"><span class="ex">насчёт денег</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = предлог + сущ. «счёт»; можно вставить слово</div>
+              <div class="cond-exs"><span class="ex">на мой счёт в банке</span></div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ <strong>за счёт</strong> (благодаря) — всегда раздельно</div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">НАПОДОБИЕ // НА ПОДОБИЕ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «вроде»</div>
+              <div class="cond-exs"><span class="ex">наподобие бабочки</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = предлог + сущ. «подобие»</div>
+              <div class="cond-exs"><span class="ex">смотрел на подобие человека</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">НЕСМОТРЯ НА // НЕ СМОТРЯ НА</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «вопреки»</div>
+              <div class="cond-exs"><span class="ex">несмотря на дождь</span><span class="ex">невзирая на слабость</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = деепричастие «не имея зрительного контакта»</div>
+              <div class="cond-exs"><span class="ex">шёл, не смотря под ноги</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ОТТОГО // ОТ ТОГО</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = «потому»</div>
+              <div class="cond-exs"><span class="ex">проснулся оттого, что стучали</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = «того» указывает на конкретное</div>
+              <div class="cond-exs"><span class="ex">от того дома можно дойти</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Союзы и частицы -->
+      <div class="subsection" id="sub-14-conj">
+        <p class="sec-label m">§3 — Союзы и частицы</p>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ЧТОБЫ // ЧТО БЫ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = союз цели (нельзя убрать БЫ)</div>
+              <div class="cond-exs"><span class="ex">хочу, чтобы ты ушёл</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = местоим. + частица; БЫ можно убрать</div>
+              <div class="cond-exs"><span class="ex">не знал, что бы мне купить</span></div>
+            </div></div>
+          </div>
+          <div class="algo">
+            <div class="algo-title">Тест: убери БЫ — смысл сохранился? → раздельно</div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ТОЖЕ / ТАКЖЕ // ТО ЖЕ / ТАК ЖЕ</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = взаимозаменяемы и = союзу «и»</div>
+              <div class="cond-exs"><span class="ex">я тоже = я также = и я люблю квас</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = ЖЕ можно убрать, указание на что-то</div>
+              <div class="cond-exs"><span class="ex">сделал так же, как вчера</span><span class="ex">то же, что вчера</span></div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">ЗАТО // ЗА ТО</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Слитно</strong> = можно заменить на «но»</div>
+              <div class="cond-exs"><span class="ex">глупая, зато красивая</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule"><strong>Раздельно</strong> = «то» указывает на конкретный предмет</div>
+              <div class="cond-exs"><span class="ex">спрятался за то дерево</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Запомнить -->
+      <div class="subsection" id="sub-14-mem">
+        <p class="sec-label m">§4 — Запомнить наизусть</p>
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">Наречия — всегда слитно</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule">вдребезги, исподтишка, вдогонку, дотла, невпопад, понаслышке, наспех, наугад, навсегда, наскоро, отовсюду, зачастую, вплотную, вручную, напрямую, втроём, вдвое, надвое, сбоку, напролом, наотрез, напрокат, кряду, надолго, изредка, помногу</div>
+            </div></div>
+          </div>
+        </div>
+        <div class="rule-card m">
+          <div class="rule-head"><span class="badge m">Всегда раздельно</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">📝</span><div class="cond-body">
+              <div class="cond-rule">в охапку, в упор, в сердцах, до смерти, до упаду, с лету, на ходу, с размаху, с разбегу, на миг, под силу, по двое, по трое, за границу, за границей, под мышкой, как будто, навряд ли, вряд ли, как раз, всё равно</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ЗАДАНИЕ 13 — НЕ ─── -->
+    <div class="view" id="view-13">
+      <div class="tabs" id="tabs13">
+        <button class="tab b active" data-sec="13-sep">Раздельно</button>
+        <button class="tab b" data-sec="13-tog">Слитно</button>
+        <button class="tab b" data-sec="13-exc">Исключения</button>
+      </div>
+
+      <div class="subsection active" id="sub-13-sep">
+        <p class="sec-label b">§1 — НЕ пишется раздельно</p>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Противопоставление с А</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">↔</span><div class="cond-body">
+              <div class="cond-rule">Есть союз <strong>А</strong>, слова взаимоисключают друг друга</div>
+              <div class="cond-exs">
+                <span class="ex">не большая, <em>а</em> уютная</span>
+                <span class="ex">не друг, <em>а</em> враг</span>
+                <span class="ex">не хороший, <em>а</em> плохой</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Слова-усилители</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">💬</span><div class="cond-body">
+              <div class="cond-rule">Рядом стоят <strong>отнюдь, далеко, вовсе</strong> — оттягивают НЕ от любой части речи</div>
+              <div class="cond-exs">
+                <span class="ex">отнюдь не красивый</span>
+                <span class="ex">далеко не смело</span>
+                <span class="ex">вовсе не красавец</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">НИ-слова</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">💬</span><div class="cond-body">
+              <div class="cond-rule">Рядом: <strong>нисколько, ничуть, нимало, никак, никому, никогда</strong></div>
+              <div class="cond-exs">
+                <span class="ex">ничуть не правильный</span>
+                <span class="ex">нисколько не уставший</span>
+                <span class="ex">никому не известный</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Краткие причастия</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">С краткими причастиями — <strong>всегда раздельно</strong></div>
+              <div class="cond-exs">
+                <span class="ex">работа не выполнена</span>
+                <span class="ex">смена не закончена</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Глаголы и деепричастия</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">С глаголами и деепричастиями — <strong>всегда раздельно</strong></div>
+              <div class="cond-exs">
+                <span class="ex">не видел</span>
+                <span class="ex">не слышал</span>
+                <span class="ex">не думая</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ Кроме слов, которые без НЕ не употребляются: <strong>невзлюбил, ненавидел, негодовать</strong></div>
+        </div>
+
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Местоимения, числительные, союзы, частицы</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">С местоимениями, числительными, союзами и частицами — <strong>раздельно</strong></div>
+              <div class="cond-exs">
+                <span class="ex">не я</span>
+                <span class="ex">не пять</span>
+                <span class="ex">не то</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub-13-tog">
+        <p class="sec-label b">§2 — НЕ пишется слитно</p>
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Без НЕ не употребляется</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">Слово без НЕ не существует → пишем <strong>слитно</strong></div>
+              <div class="cond-exs">
+                <span class="ex">невзлюбить</span>
+                <span class="ex">ненавидеть</span>
+                <span class="ex">негодовать</span>
+                <span class="ex">нелепый</span>
+                <span class="ex">небрежно</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Можно заменить синонимом без НЕ</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">↔</span><div class="cond-body">
+              <div class="cond-rule">Прилагательные, существительные, наречия — если есть синоним</div>
+              <div class="cond-exs">
+                <span class="ex">нехороший = плохой</span>
+                <span class="ex">неправда = ложь</span>
+                <span class="ex">нехорошо = плохо</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="note">💡 Нет противопоставления с А + можно заменить синонимом → пишем слитно</div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub-13-exc">
+        <p class="sec-label b">§3 — Исключения</p>
+        <div class="rule-card b">
+          
+          <div class="rule-head"><span class="badge b">Слитно, хотя кажется раздельным</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">⚡</span><div class="cond-body">
+              <div class="cond-rule">Неопределённые местоимения — <strong>слитно</strong></div>
+              <div class="cond-exs">
+                <span class="ex">некто</span>
+                <span class="ex">нечто</span>
+                <span class="ex">некогда</span>
+                <span class="ex">некоторый</span>
+              </div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">⚡</span><div class="cond-body">
+              <div class="cond-rule">Частица <strong>нежели</strong> и союз <strong>несмотря на то что</strong> — слитно</div>
+              <div class="cond-exs">
+                <span class="ex">лучше, нежели раньше</span>
+                <span class="ex">несмотря на то что опаздывал</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div class="algo">
+          <div class="algo-title">Алгоритм — как решать задание 13</div>
+          <div class="algo-steps">
+            <div class="algo-step"><div class="step-n" style="background:rgba(95,200,255,.2);color:var(--b)">1</div><div class="step-txt">Есть слова <strong>отнюдь / далеко / вовсе / ни-слова</strong>? → раздельно</div></div>
+            <div class="algo-step"><div class="step-n" style="background:rgba(95,200,255,.2);color:var(--b)">2</div><div class="step-txt">Есть противопоставление с <strong>А</strong>? → раздельно</div></div>
+            <div class="algo-step"><div class="step-n" style="background:rgba(95,200,255,.2);color:var(--b)">3</div><div class="step-txt">Это <strong>глагол / деепричастие / краткое причастие</strong>? → раздельно</div></div>
+            <div class="algo-step"><div class="step-n" style="background:rgba(95,200,255,.2);color:var(--b)">4</div><div class="step-txt">Слово без НЕ не существует? → слитно</div></div>
+            <div class="algo-step"><div class="step-n" style="background:rgba(95,200,255,.2);color:var(--b)">5</div><div class="step-txt">Можно заменить синонимом без НЕ? → слитно</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ЗАДАНИЕ 12 — СПРЯЖЕНИЯ ─── -->
+    <div class="view" id="view-12">
+      <div class="tabs" id="tabs12">
+        <button class="tab o active" data-sec="12-spr">Спряжения</button>
+        <button class="tab o" data-sec="12-exc">Исключения</button>
+        <button class="tab o" data-sec="12-hard">Сложные случаи</button>
+      </div>
+
+      <!-- Спряжения -->
+      <div class="subsection active" id="sub-12-spr">
+        <p class="sec-label o">§1 — Спряжения глаголов</p>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">I и II спряжение</span><span class="rule-lbl">Определяется по инфинитиву</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">I</span><div class="cond-body">
+              <div class="cond-rule"><strong>I спряжение</strong> — все глаголы <strong>не на -ИТЬ</strong></div>
+              <div class="cond-exs"><span class="ex">писАТЬ, читАТЬ, лаЯТЬ</span></div>
+              <div class="cond-rule" style="margin-top:8px">Окончания: <strong>-Е-, -У-, -Ю-</strong></div>
+              <div class="cond-exs">
+                <span class="ex">пишУ / пишЕМ</span>
+                <span class="ex">пишЕШЬ / пишЕТЕ</span>
+                <span class="ex">пишЕТ / пишУТ</span>
+              </div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">II</span><div class="cond-body">
+              <div class="cond-rule"><strong>II спряжение</strong> — все глаголы <strong>на -ИТЬ</strong></div>
+              <div class="cond-exs"><span class="ex">говорИТЬ, любИТЬ</span></div>
+              <div class="cond-rule" style="margin-top:8px">Окончания: <strong>-И-, -А-, -Я-</strong></div>
+              <div class="cond-exs">
+                <span class="ex">говорЮ / говорИМ</span>
+                <span class="ex">говорИШЬ / говорИТЕ</span>
+                <span class="ex">говорИТ / говорЯТ</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="note">💡 Спряжение определяй только по <strong>инфинитиву</strong> (неопределённой форме), когда окончание безударное</div>
+        </div>
+      </div>
+
+      <!-- Исключения -->
+      <div class="subsection" id="sub-12-exc">
+        <p class="sec-label o">§2 — Исключения</p>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">I спряжение</span><span class="rule-lbl">Хотя должны быть во II</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">⚡</span><div class="cond-body">
+              <div class="cond-rule">Глаголы <strong>не на -ИТЬ</strong>, но с окончаниями I спряжения (Е, У, Ю)</div>
+              <div class="cond-exs">
+                <span class="ex">брИТЬ → бреЕШЬ, бреЮТ</span>
+                <span class="ex">стелИТЬ → стелЕШЬ, стелЮТ</span>
+                <span class="ex">зиждИТЬся</span>
+                <span class="ex">зыбИТЬся</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">II спряжение</span><span class="rule-lbl">Хотя оканчиваются не на -ИТЬ</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">⚡</span><div class="cond-body">
+              <div class="cond-rule">11 глаголов с окончаниями II спряжения (И, А, Я)</div>
+              <div class="cond-exs">
+                <span class="ex">гнАТЬ</span>
+                <span class="ex">дышАТЬ</span>
+                <span class="ex">терпЕТЬ</span>
+                <span class="ex">обидЕТЬ</span>
+                <span class="ex">слышАТЬ</span>
+                <span class="ex">видЕТЬ</span>
+                <span class="ex">ненавидЕТЬ</span>
+                <span class="ex">держАТЬ</span>
+                <span class="ex">смотрЕТЬ</span>
+                <span class="ex">вертЕТЬ</span>
+                <span class="ex">зависЕТЬ</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="note">💡 Запомни: <strong>гнать, дышать, терпеть, обидеть, слышать, видеть, ненавидеть, держать, смотреть, вертеть, зависеть</strong></div>
+        </div>
+      </div>
+
+      <!-- Сложные случаи -->
+      <div class="subsection" id="sub-12-hard">
+        <p class="sec-label o">§3 — Сложные случаи</p>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">Причастия типа «выкач_нный»</span><span class="rule-lbl">Зависит от исходного глагола</span></div>
+          <div class="conds">
+            <div class="cond"><span class="cond-ico">💡</span><div class="cond-body">
+              <div class="cond-rule">Перед <strong>НН</strong> пишется та же буква, что в инфинитиве перед <strong>-ТЬ</strong></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">вод<em>а</em> выкач<strong>А</strong>нная ← выкач<strong>А</strong>ть (И перед НН → А)</div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✦</span><div class="cond-body">
+              <div class="cond-rule">бочк<em>а</em> выкач<strong>Е</strong>нная ← выкат<strong>И</strong>ть (И перед НН → Е)</div>
+            </div></div>
+          </div>
+          <div class="algo" style="margin-top:10px">
+            <div class="algo-title">Алгоритм</div>
+            <div class="algo-steps">
+              <div class="algo-step"><div class="step-n o">1</div><div class="step-txt">Найди исходный глагол (от которого образовано причастие)</div></div>
+              <div class="algo-step"><div class="step-n o">2</div><div class="step-txt">Посмотри на букву перед <strong>-ТЬ</strong> в инфинитиве</div></div>
+              <div class="algo-step"><div class="step-n o">3</div><div class="step-txt">Если <strong>А/Я</strong> → пиши <strong>А/Я</strong> перед НН. Если <strong>И/Е</strong> → пиши <strong>Е</strong> перед НН</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rule-card o">
+          <div class="rule-head"><span class="badge o">Вид глагола при образовании причастия</span></div>
+          <div class="conds two">
+            <div class="cond"><span class="cond-ico">→</span><div class="cond-body">
+              <div class="cond-rule"><strong>Несов. вид</strong> (что делать?) → причастие несов. вида</div>
+              <div class="cond-exs"><span class="ex">забивАТЬ → забиваЮЩий</span></div>
+            </div></div>
+            <div class="cond"><span class="cond-ico">✓</span><div class="cond-body">
+              <div class="cond-rule"><strong>Сов. вид</strong> (что сделать?) → причастие сов. вида</div>
+              <div class="cond-exs"><span class="ex">забИТЬ → забИвший</span></div>
+            </div></div>
+          </div>
+          <div class="exc">⚠️ Всегда задавай вопрос к причастию! <strong>что делающий?</strong> или <strong>что сделавший?</strong></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ─── ЗАДАНИЕ 9 — КОРНИ ─── -->
     <div class="view" id="view-9">
       <div class="tabs" id="tabs9">
@@ -1303,6 +2095,133 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
       </div>
     </div>
 
+    <!-- ─── ШПАРГАЛКА 12 ─── -->
+    <div class="view" id="view-cheat-12">
+      <p class="sec-label o" style="margin-bottom:16px">Задание 12 — Спряжения</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>Определение спряжения</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">I спряжение</span><span class="cheat-val">Все глаголы <strong>не на -ИТЬ</strong> → окончания Е, У, Ю</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">II спряжение</span><span class="cheat-val">Все глаголы <strong>на -ИТЬ</strong> → окончания И, А, Я</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>Окончания</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">I: 1л.</span><span class="cheat-val">пишУ / пишЕМ</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">I: 2л.</span><span class="cheat-val">пишЕШЬ / пишЕТЕ</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">I: 3л.</span><span class="cheat-val">пишЕТ / пишУТ (лаЮТ)</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">II: 1л.</span><span class="cheat-val">говорЮ / говорИМ</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">II: 2л.</span><span class="cheat-val">говорИШЬ / говорИТЕ</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">II: 3л.</span><span class="cheat-val">говорИТ / говорЯТ</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>Исключения I спряжения (не на -ИТЬ, но I)</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">брить</span><span class="cheat-val">бреЕШЬ, бреЮТ</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">стелить</span><span class="cheat-val">стелЕШЬ, стелЮТ</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>Исключения II спряжения (не на -ИТЬ, но II)</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">11 глаголов</span><span class="cheat-val"><strong>гнать, дышать, терпеть, обидеть, слышать, видеть, ненавидеть, держать, смотреть, вертеть, зависеть</strong></span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--o)"></span>Причастия</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">А/Я перед -ТЬ</span><span class="cheat-val">→ А перед НН: выкачАть → выкачАнный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--o)">И/Е перед -ТЬ</span><span class="cheat-val">→ Е перед НН: выкатИть → выкачЕнный</span></div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА 15 ─── -->
+    <div class="view" id="view-cheat-15">
+      <p class="sec-label l" style="margin-bottom:16px">Задание 15 — Н и НН</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--l)"></span>От существительного</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">-АН-/-ЯН-/-ИН-</span><span class="cheat-val">→ одна Н: кожаный, серебряный. Искл: стеклянный, оловянный, деревянный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">-ЕНН-/-ОНН-</span><span class="cheat-val">→ две НН: авиационный, торжественный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Основа на Н + -Н-</span><span class="cheat-val">→ две НН: осенний, лунный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Искл. одна Н</span><span class="cheat-val">ветреный (но безветренный)</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--l)"></span>От глагола → НН если хоть одно:</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Сов. вид</span><span class="cheat-val">решить → решённый</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Есть приставка</span><span class="cheat-val">закрашенный, прочитанный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Зависимое слово</span><span class="cheat-val">крашенный мастером</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">-ОВА-/-ЕВА-</span><span class="cheat-val">маринованный, асфальтированный</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Ничего нет → Н</span><span class="cheat-val">крашеный, жареный, варёный</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--l)"></span>Краткие формы</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Кратк. причастие</span><span class="cheat-val">Всегда одна Н: семена рассеяНы</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Кратк. прилаг.</span><span class="cheat-val">Столько же Н: бабуля рассеяННа</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--l)"></span>Исключения НН</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Запомни</span><span class="cheat-val">невиданный, неслыханный, нежданный, негаданный, нечаянный, желанный, священный, медленный, окаянный, данный</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--l)"></span>Исключения одна Н</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--l)">Запомни</span><span class="cheat-val">смышлёный, названый брат, посажёный отец</span></div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА 14 ─── -->
+    <div class="view" id="view-cheat-14">
+      <p class="sec-label m" style="margin-bottom:16px">Задание 14 — Слитно/раздельно/дефис</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--m)"></span>Главные правила</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">Всегда раздельно</span><span class="cheat-val">в течение, в продолжение, в заключение, за счёт</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">Всегда дефис</span><span class="cheat-val">-то, -либо, -нибудь, кое- → что-то, кое-кто</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--m)"></span>Производные предлоги</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">вследствие</span><span class="cheat-val">Слитно+Е = «из-за». Раздельно+И = следствие</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">навстречу</span><span class="cheat-val">Слитно = «по направлению к». Раздельно = на [важную] встречу</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">ввиду</span><span class="cheat-val">Слитно = «из-за». Раздельно = «на виду». Иметь в виду — всегда раздельно</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">насчёт</span><span class="cheat-val">Слитно = «об». Раздельно = на [мой] счёт. За счёт — всегда раздельно</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">наподобие</span><span class="cheat-val">Слитно = «вроде». Раздельно = на подобие [чего-то]</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">несмотря на</span><span class="cheat-val">Слитно = «вопреки». Раздельно = деепричастие (не смотря под ноги)</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">оттого</span><span class="cheat-val">Слитно = «потому». Раздельно = от того дома (указание)</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--m)"></span>Союзы и частицы</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">чтобы</span><span class="cheat-val">Слитно = союз цели. Раздельно = БЫ можно убрать</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">тоже / также</span><span class="cheat-val">Слитно = = «и». Раздельно = ЖЕ можно убрать</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">зато</span><span class="cheat-val">Слитно = «но». Раздельно = за то дерево (указание)</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--m)"></span>Слитно (наречия)</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">Запомни</span><span class="cheat-val">вдребезги, наугад, навсегда, наспех, зачастую, вплотную, надолго, изредка, напролом, вдвое, сбоку</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--m)"></span>Раздельно</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--m)">Запомни</span><span class="cheat-val">в упор, до смерти, на ходу, под силу, по двое, за границей, как будто, вряд ли, как раз, всё равно</span></div>
+      </div>
+    </div>
+
+    <!-- ─── ШПАРГАЛКА 13 ─── -->
+    <div class="view" id="view-cheat-13">
+      <p class="sec-label b" style="margin-bottom:16px">Задание 13 — НЕ</p>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--b)"></span>НЕ раздельно — всегда</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Глагол / деепр.</span><span class="cheat-val">не видел, не думая (кроме тех, что без НЕ не живут)</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Кратк. причастие</span><span class="cheat-val">работа не выполнена, смена не закончена</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Местоим. / числ.</span><span class="cheat-val">не я, не пять, не то (кроме некто, нечто, некогда)</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--b)"></span>НЕ раздельно — при условии</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Союз А</span><span class="cheat-val">не большая, <strong>а</strong> уютная; не друг, <strong>а</strong> враг</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">отнюдь / далеко / вовсе</span><span class="cheat-val">отнюдь не красивый, вовсе не красавец</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">ни-слова</span><span class="cheat-val">нисколько, ничуть, нимало, никак, никому, никогда</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--b)"></span>НЕ слитно</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Без НЕ не живёт</span><span class="cheat-val">невзлюбить, ненавидеть, нелепый, небрежно</span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Есть синоним</span><span class="cheat-val">нехороший = плохой, неправда = ложь</span></div>
+      </div>
+      <div class="cheat-section">
+        <div class="cheat-title"><span class="cheat-title-dot" style="background:var(--b)"></span>Исключения — слитно</div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Местоимения</span><span class="cheat-val"><strong>некто, нечто, некогда, некоторый</strong></span></div>
+        <div class="cheat-row"><span class="cheat-key" style="color:var(--b)">Частица / союз</span><span class="cheat-val"><strong>нежели</strong>; <strong>несмотря на то что</strong></span></div>
+      </div>
+    </div>
+
   </div><!-- /scroll -->
 </div><!-- /app -->
 
@@ -1353,7 +2272,7 @@ function updateHeader(viewId) {
   backBtn.classList.toggle('hidden', isHome);
 
   const titles = {
-    'view-home':        ['ЕГЭ 2026 · Русский язык', 'Задания 9, 10 и 11'],
+    'view-home':        ['ЕГЭ 2026 · Русский язык', 'Подготовка к экзамену'],
     'view-menu-tasks':  ['Тестовые задания', 'Выбери задание'],
     'view-menu-cheat':  ['Шпаргалки', 'Выбери задание'],
     'view-menu-test':   ['Тест', 'Выбери задание'],
@@ -1361,7 +2280,14 @@ function updateHeader(viewId) {
     'view-10':          ['Задание 10', 'Приставки'],
     'view-11':          ['Задание 11', 'Суффиксы'],
     'view-test':        ['Тест', ''],
-    'view-cheat-9':     ['Шпаргалка', 'Задание 9 — Корни'],
+    'view-12':          ['Задание 12', 'Спряжения глаголов'],
+    'view-13':          ['Задание 13', 'НЕ слитно и раздельно'],
+    'view-14':          ['Задание 14', 'Слитно / раздельно / дефис'],
+    'view-15':          ['Задание 15', 'Н и НН'],
+    'view-cheat-12':    ['Шпаргалка', 'Задание 12 — Спряжения'],
+    'view-cheat-13':    ['Шпаргалка', 'Задание 13 — НЕ'],
+    'view-cheat-14':    ['Шпаргалка', 'Задание 14 — Слитно/раздельно'],
+    'view-cheat-15':    ['Шпаргалка', 'Задание 15 — Н и НН'],
     'view-cheat-10':    ['Шпаргалка', 'Задание 10 — Приставки'],
     'view-cheat-11':    ['Шпаргалка', 'Задание 11 — Суффиксы'],
   };
@@ -1420,6 +2346,18 @@ const ALL_TESTS = {
     { q: 'Как пишется: «пре/при_рвать беседу»?', opts: ['прирвать', 'прервать'], correct: 1, exp: 'ПРЕ- = ПЕРЕ- (перервать) → прервать.' },
     { q: 'Как пишется: «из/ис_пытать»?', opts: ['изпытать', 'испытать'], correct: 1, exp: 'П — глухая → пишем С → испытать.' },
   ],
+  '12': [
+    { q: 'Какое окончание у глагола «пиш_шь»?', opts: ['пишИшь', 'пишЕшь'], correct: 1, exp: 'Писать — не на -ИТЬ → I спряжение → окончание Е → пишЕшь.' },
+    { q: 'Какое окончание у глагола «говор_шь»?', opts: ['говорИшь', 'говорЕшь'], correct: 0, exp: 'Говорить — на -ИТЬ → II спряжение → окончание И → говорИшь.' },
+    { q: 'К какому спряжению относится глагол «брить»?', opts: ['I спряжение', 'II спряжение'], correct: 0, exp: 'Брить — исключение! Хотя оканчивается на -ИТЬ, относится к I спряжению: бреЕшь, бреЮт.' },
+    { q: 'К какому спряжению относится глагол «смотреть»?', opts: ['I спряжение', 'II спряжение'], correct: 1, exp: 'Смотреть — исключение II спряжения! Хотя не на -ИТЬ: смотрИшь, смотрЯт.' },
+    { q: 'Как пишется: «они слыш_т»?', opts: ['слышУт', 'слышАт'], correct: 1, exp: 'Слышать — исключение II спряжения → окончание А → слышАт.' },
+    { q: 'Как пишется: «они пиш_т»?', opts: ['пишУт', 'пишАт'], correct: 0, exp: 'Писать — I спряжение → окончание У/Ю → пишУт.' },
+    { q: 'Как пишется: «выкач_нная вода» (от выкачАть)?', opts: ['выкачЕнная', 'выкачАнная'], correct: 1, exp: 'От выкачАть: А перед -ТЬ → А перед НН → выкачАнная.' },
+    { q: 'Как пишется: «выкач_нная бочка» (от выкатИть)?', opts: ['выкатЕнная', 'выкатАнная'], correct: 0, exp: 'От выкатИть: И перед -ТЬ → Е перед НН → выкатЕнная.' },
+    { q: 'Какой вид у глагола «забивАТЬ» (что делать?)?', opts: ['Несовершенный', 'Совершенный'], correct: 0, exp: 'Забивать (что делать?) — несовершенный вид, обозначает процесс.' },
+    { q: 'К какому спряжению относится глагол «зависеть»?', opts: ['I спряжение', 'II спряжение'], correct: 1, exp: 'Зависеть — исключение II спряжения: зависИшь, зависЯт.' },
+  ],
   '11': [
     { q: 'Какой суффикс в слове «шалашик»?', opts: ['-ЕК-', '-ИК-'], correct: 1, exp: 'Шалашик → шалашика (И сохраняется в р.п.) → -ИК-.' },
     { q: 'Как пишется: «ноч_вать»?', opts: ['ночовать', 'ночевать'], correct: 1, exp: '(Я) ночую → окончание -УЮ → пишем -ЕВА- → ночевать.' },
@@ -1432,6 +2370,42 @@ const ALL_TESTS = {
     { q: 'Суффикс в слове «дружочек»?', opts: ['-ИК-', '-ЕК-'], correct: 1, exp: 'Дружочек → дружочка (гласная выпадает) → суффикс -ЕК-.' },
     { q: 'Как пишется: «кровел_щик»?', opts: ['кровелщик', 'кровельщик'], correct: 1, exp: 'Ь перед -ЩИК- пишется только после Л → кровельщик.' },
   ],
+  '13': [
+    { q: 'Как пишется: «(не)выполнена работа»?', opts: ['невыполнена', 'не выполнена'], correct: 1, exp: 'Краткое причастие — НЕ всегда раздельно: не выполнена.' },
+    { q: 'Как пишется: «отнюдь (не)красивый»?', opts: ['отнюдь некрасивый', 'отнюдь не красивый'], correct: 1, exp: 'Слово «отнюдь» — усилитель, оттягивает НЕ → раздельно.' },
+    { q: 'Как пишется: «(не)взлюбил»?', opts: ['не взлюбил', 'невзлюбил'], correct: 1, exp: 'Слово без НЕ не существует (*взлюбил) → слитно: невзлюбил.' },
+    { q: 'Как пишется: «комната (не)большая, а уютная»?', opts: ['небольшая', 'не большая'], correct: 1, exp: 'Есть противопоставление с союзом А → НЕ раздельно.' },
+    { q: 'Как пишется: «(не)правда» (= ложь)?', opts: ['не правда', 'неправда'], correct: 1, exp: 'Нет противопоставления, есть синоним «ложь» → слитно: неправда.' },
+    { q: 'Как пишется: «ничуть (не)уставший»?', opts: ['ничуть неуставший', 'ничуть не уставший'], correct: 1, exp: '«Ничуть» — НИ-слово, оттягивает НЕ → раздельно.' },
+    { q: 'Как пишется: «(не)думая»?', opts: ['недумая', 'не думая'], correct: 1, exp: 'Деепричастие — НЕ всегда раздельно: не думая.' },
+    { q: 'Как пишется: «(не)кто постучал»?', opts: ['не кто', 'некто'], correct: 1, exp: 'Неопределённое местоимение — исключение, пишется слитно: некто.' },
+    { q: 'Как пишется: «вовсе (не)красавец»?', opts: ['вовсе некрасавец', 'вовсе не красавец'], correct: 1, exp: '«Вовсе» — усилитель, оттягивает НЕ → раздельно.' },
+    { q: 'Как пишется: «(не)лепый»?', opts: ['не лепый', 'нелепый'], correct: 1, exp: 'Слово без НЕ не существует (*лепый) → слитно: нелепый.' },
+  ],
+  '14': [
+    { q: 'Как пишется: «(в)следствие болезни»?', opts: ['в следствие', 'вследствие'], correct: 1, exp: 'Можно заменить на «из-за болезни» → производный предлог → слитно: вследствие.' },
+    { q: 'Как пишется: «идти (на)встречу ветру»?', opts: ['навстречу', 'на встречу'], correct: 0, exp: '«По направлению к» → наречие/предлог → слитно: навстречу ветру.' },
+    { q: 'Как пишется: «(в)виду опоздания»?', opts: ['ввиду', 'в виду'], correct: 0, exp: 'Можно заменить на «из-за» → производный предлог → слитно: ввиду.' },
+    { q: 'Как пишется: «поговорим (на)счёт денег»?', opts: ['насчёт', 'на счёт'], correct: 0, exp: 'Заменяется на «об» → слитно: насчёт денег.' },
+    { q: 'Как пишется: «хочу, (что)бы ты пришёл»?', opts: ['что бы', 'чтобы'], correct: 1, exp: 'БЫ нельзя убрать без потери смысла → союз цели → слитно: чтобы.' },
+    { q: 'Как пишется: «я (тоже) хочу»?', opts: ['то же', 'тоже'], correct: 1, exp: 'Заменяется на «и я хочу» → союз → слитно: тоже.' },
+    { q: 'Как пишется: «(за)то красивая»?', opts: ['зато', 'за то'], correct: 0, exp: 'Заменяется на «но» → союз → слитно: зато.' },
+    { q: 'Как пишется: «(от)того стало грустно»?', opts: ['оттого', 'от того'], correct: 0, exp: 'Заменяется на «потому» → союз → слитно: оттого.' },
+    { q: 'Как пишется: «кое(-)кто»?', opts: ['коекто', 'кое-кто'], correct: 1, exp: 'Слова с кое- всегда пишутся через дефис: кое-кто.' },
+    { q: 'Как пишется: «гулял, (не)смотря на дождь»?', opts: ['не смотря', 'несмотря'], correct: 1, exp: '«Вопреки» → производный предлог → слитно: несмотря на дождь.' },
+  ],
+  '15': [
+    { q: 'Как пишется: «кож_ый портфель»?', opts: ['кожаНый', 'кожаННый'], correct: 0, exp: 'От «кожа» с суффиксом -АН- → одна Н: кожаный.' },
+    { q: 'Как пишется: «стекл_ый стакан»?', opts: ['стеклЯНый', 'стеклЯННый'], correct: 1, exp: 'Исключение! Стеклянный, оловянный, деревянный — всегда НН.' },
+    { q: 'Как пишется: «авиацио_ый завод»?', opts: ['авиациоНый', 'авиациоННый'], correct: 1, exp: 'От «авиация», суффикс начинается на О → -ОНН- → авиационный.' },
+    { q: 'Как пишется: «реше_ая задача» (от решить)?', opts: ['решеНая', 'решеННая'], correct: 1, exp: 'Решить — совершенный вид → НН: решённая задача.' },
+    { q: 'Как пишется: «кр_еный забор» (без приставки, без зависимых слов)?', opts: ['крашеНый', 'крашеННый'], correct: 0, exp: 'Нет приставки, нет зависимых слов, несов. вид, нет -ОВА- → одна Н: крашеный.' },
+    { q: 'Как пишется: «замороже_ые продукты»?', opts: ['заморожеНые', 'заморожеННые'], correct: 1, exp: 'Есть приставка ЗА- → НН: замороженные.' },
+    { q: 'Как пишется: «семена рассея_ы» (краткое причастие)?', opts: ['рассеяНы', 'рассеяННы'], correct: 0, exp: 'Краткое причастие — всегда одна Н: семена рассеяны.' },
+    { q: 'Как пишется: «бабуля рассея_а» (краткое прилагательное)?', opts: ['рассеяНа', 'рассеяННа'], correct: 1, exp: 'Краткое прилагательное — столько же Н, сколько в полной форме: рассеянная → рассеянна.' },
+    { q: 'Как пишется: «осе_ий лес»?', opts: ['осеНий', 'осеННий'], correct: 1, exp: 'Осень — основа на Н + суффикс -Н- → НН: осенний.' },
+    { q: 'Как пишется: «марино_ые огурцы»?', opts: ['маринованые', 'маринованные'], correct: 1, exp: 'Суффикс -ОВА- → НН: маринованные.' },
+  ],
 };
 
 let currentTestSet = [], testIdx = 0, score = 0, answered = false;
@@ -1441,7 +2415,7 @@ function startTestFor(zadanie) {
   testIdx = 0; score = 0;
   document.getElementById('test-result').classList.remove('show');
   document.getElementById('test-body').style.display = 'block';
-  const label = { '9': 'Задание 9 — Корни', '10': 'Задание 10 — Приставки', '11': 'Задание 11 — Суффиксы' };
+  const label = { '9': 'Задание 9 — Корни', '10': 'Задание 10 — Приставки', '11': 'Задание 11 — Суффиксы', '12': 'Задание 12 — Спряжения', '13': 'Задание 13 — НЕ', '14': 'Задание 14 — Слитно/раздельно', '15': 'Задание 15 — Н и НН' };
   openView('view-test');
   document.getElementById('headerSub').textContent = label[zadanie];
   renderQuestion();
