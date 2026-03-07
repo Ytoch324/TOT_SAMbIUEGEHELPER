@@ -102,31 +102,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
   margin-top: 1px;
 }
 
-/* ─── TASK SWITCHER ─── */
-.task-switcher {
-  display: flex;
-  background: var(--card);
-  border-radius: 12px;
-  padding: 3px;
-  gap: 3px;
-}
 
-.task-btn {
-  flex: 1;
-  padding: 7px 6px;
-  border-radius: 9px;
-  font-family: 'Unbounded', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: var(--muted);
-  transition: all .2s;
-  text-align: center;
-}
-.task-btn.active {
-  color: #0e0e14;
-  background: var(--y);
-}
-.task-btn:nth-child(2).active { background: var(--p); color: #fff; }
 
 /* ─── SCROLL AREA ─── */
 #scroll {
@@ -642,10 +618,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
       </div>
       <div style="width:32px;flex-shrink:0"></div>
     </div>
-    <div class="task-switcher" id="taskSwitcher">
-      <button class="task-btn active" id="btn11" onclick="switchTask(11)">§11 Суффиксы</button>
-      <button class="task-btn" id="btn10" onclick="switchTask(10)">§10 Приставки</button>
-    </div>
+
   </div>
 
   <!-- ═══ SCROLL AREA ═══ -->
@@ -1059,11 +1032,9 @@ function updateHeader(viewId) {
   const backBtn = document.getElementById('backBtn');
   const title = document.getElementById('headerTitle');
   const sub = document.getElementById('headerSub');
-  const switcher = document.getElementById('taskSwitcher');
 
   const isHome = viewId === 'view-home';
   backBtn.classList.toggle('hidden', isHome);
-  switcher.style.display = isHome ? 'flex' : 'none';
 
   const titles = {
     'view-home':  ['ЕГЭ 2026 · Русский язык', 'Задания 10 и 11'],
@@ -1080,14 +1051,6 @@ function updateHeader(viewId) {
     if (!isHome) { tg.BackButton.show(); tg.BackButton.onClick(goBack); }
     else tg.BackButton.hide();
   }
-}
-
-function switchTask(n) {
-  currentTask = n;
-  document.getElementById('btn11').classList.toggle('active', n === 11);
-  document.getElementById('btn10').classList.toggle('active', n === 10);
-  history = [];
-  openView(n === 11 ? 'view-11' : 'view-10');
 }
 
 // ══════════════════════════════════════
