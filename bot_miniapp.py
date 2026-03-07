@@ -1,6 +1,6 @@
 import os
 import telebot
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBAPP_URL = "https://ytoch324.github.io/TOT_SAMbIUEGEHELPER/"  # вставь свою ссылку
@@ -10,8 +10,8 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=["start"])
 def start(message):
-    kb = InlineKeyboardMarkup()
-    kb.add(InlineKeyboardButton(
+    kb = ReplyKeyboardMarkup(resize_keyboard=True)
+    kb.add(KeyboardButton(
         "📖 Открыть материалы",
         web_app=WebAppInfo(url=WEBAPP_URL)
     ))
